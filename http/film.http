@@ -1,0 +1,49 @@
+### Add Film
+POST http://localhost:8080/api/v1/film
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": 0,
+  "title": "Suzme",
+  "genre": "Anime, Action, Adventure",
+  "director": "Makoto Shinkai",
+  "cast": "Nanoka Hara, Hokuto Matsumura, Eri Fukatsu",
+  "duration": 121,
+  "releaseDate": "2022-11-11",
+  "production": "Japan",
+  "synopsis": "A modern action adventure road story where a 17-year-old girl named Suzume helps a mysterious young man close doors from the other side that are releasing disasters all over in Japan."
+}
+
+
+### Get All Films
+GET http://localhost:8080/api/v1/film
+Accept: application/json
+Content-Type: application/json
+
+### Get Film by ID
+GET http://localhost:8080/api/v1/film/2
+Accept: application/json
+Content-Type: application/json
+
+### Update Film
+PUT http://localhost:8080/api/v1/film/2
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": 1,
+  "title": "Your Name",
+  "genre": "Anime, Drama, Fantasy",
+  "director": "Makoto Shinkai",
+  "cast": "Ryunosuke Kamiki, Mone Kamishiraishi, Ryo Narita",
+  "duration": 107,
+  "releaseDate": "2022-08-26",
+  "production": "Japan",
+  "synopsis": "Two teenagers share a profound, magical connection upon discovering they are swapping bodies. Things manage to become even more complicated when the boy and girl decide to meet in person."
+}
+
+### Delete Film
+DELETE http://localhost:8080/api/v1/film/1
+Accept: application/json
+Content-Type: application/json
