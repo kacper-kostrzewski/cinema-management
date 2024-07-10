@@ -1,11 +1,13 @@
 package pl.lodz.p.cinema_management.external.storage.film;
 
+import org.springframework.stereotype.Repository;
 import pl.lodz.p.cinema_management.api.Film.FilmDtoMapper;
 import pl.lodz.p.cinema_management.domain.Film.Film;
 import pl.lodz.p.cinema_management.domain.Film.FilmRepository;
 
 import java.util.*;
 
+@Repository
 public class FilmMemoryStorageAdapter implements FilmRepository {
     private final FilmDtoMapper filmDtoMapper;
     private final Map<Integer, Film> films = new HashMap<>();

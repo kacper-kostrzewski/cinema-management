@@ -1,10 +1,12 @@
 package pl.lodz.p.cinema_management.domain.Film;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 @RequiredArgsConstructor
 public class FilmService {
     private final FilmRepository filmRepository;

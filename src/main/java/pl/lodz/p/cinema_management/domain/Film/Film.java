@@ -4,7 +4,9 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.Objects;
+import com.smalaca.annotation.ddd.AggregateRoot;
 
+@AggregateRoot
 @Data
 public class Film {
     private Integer id;
