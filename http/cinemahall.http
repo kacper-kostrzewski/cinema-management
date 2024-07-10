@@ -1,0 +1,38 @@
+### Add Cinema Hall
+POST http://localhost:8080/api/v1/cinema-hall
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": 0,
+  "name": "Hall 1",
+  "capacity": 50
+}
+
+
+### Get All Cinema Halls
+GET http://localhost:8080/api/v1/cinema-hall
+Accept: application/json
+Content-Type: application/json
+
+### Get Cinema Hall by ID
+GET http://localhost:8080/api/v1/cinema-hall/2
+Accept: application/json
+Content-Type: application/json
+
+### Update Cinema Hall
+PUT http://localhost:8080/api/v1/cinema-hall/2
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Hall 1",
+  "capacity": 150
+}
+
+
+### Delete Cinema Hall
+DELETE http://localhost:8080/api/v1/cinema-hall/1
+Accept: application/json
+Content-Type: application/json
