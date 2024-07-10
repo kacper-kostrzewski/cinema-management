@@ -3,9 +3,13 @@ package pl.lodz.p.cinema_management.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import pl.lodz.p.cinema_management.api.CinemaHall.CinemaHallDtoMapper;
 import pl.lodz.p.cinema_management.api.Film.FilmDtoMapper;
+import pl.lodz.p.cinema_management.domain.CinemaHall.CinemaHallRepository;
+import pl.lodz.p.cinema_management.domain.CinemaHall.CinemaHallService;
 import pl.lodz.p.cinema_management.domain.Film.FilmRepository;
 import pl.lodz.p.cinema_management.domain.Film.FilmService;
+import pl.lodz.p.cinema_management.external.storage.CinemaHall.CinemaHallMemoryStorageAdapter;
 import pl.lodz.p.cinema_management.external.storage.film.FilmMemoryStorageAdapter;
 
 @Configuration
@@ -19,5 +23,15 @@ public class DomainConfiguration {
     @Bean
     public FilmService filmService(FilmRepository filmRepository) {
         return new FilmService(filmRepository);
+    }
+
+    @Bean
+    public CinemaHallRepository cinemaHallRepository(CinemaHallDtoMapper cinemaHallDtoMapper) {
+        return new CinemaHallMemoryStorageAdapter(cinemaHallDtoMapper);
+    }
+
+    @Bean
+    public CinemaHallService cinemaHallService(CinemaHallRepository cinemaHallRepository) {
+        return new CinemaHallService(cinemaHallRepository);
     }
 }
