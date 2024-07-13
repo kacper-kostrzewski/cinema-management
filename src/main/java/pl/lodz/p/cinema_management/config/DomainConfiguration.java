@@ -3,13 +3,13 @@ package pl.lodz.p.cinema_management.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import pl.lodz.p.cinema_management.api.CinemaHall.CinemaHallDtoMapper;
-import pl.lodz.p.cinema_management.api.Film.FilmDtoMapper;
-import pl.lodz.p.cinema_management.domain.CinemaHall.CinemaHallRepository;
-import pl.lodz.p.cinema_management.domain.CinemaHall.CinemaHallService;
-import pl.lodz.p.cinema_management.domain.Film.FilmRepository;
-import pl.lodz.p.cinema_management.domain.Film.FilmService;
-import pl.lodz.p.cinema_management.external.storage.CinemaHall.CinemaHallMemoryStorageAdapter;
+import pl.lodz.p.cinema_management.api.cinemahall.CinemaHallDtoMapper;
+import pl.lodz.p.cinema_management.api.film.FilmDtoMapper;
+import pl.lodz.p.cinema_management.domain.cinemahall.CinemaHallRepository;
+import pl.lodz.p.cinema_management.domain.cinemahall.CinemaHallService;
+import pl.lodz.p.cinema_management.domain.film.FilmRepository;
+import pl.lodz.p.cinema_management.domain.film.FilmService;
+import pl.lodz.p.cinema_management.external.storage.cinemahall.CinemaHallMemoryStorageAdapter;
 import pl.lodz.p.cinema_management.external.storage.film.FilmMemoryStorageAdapter;
 
 @Configuration

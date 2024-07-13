@@ -1,4 +1,4 @@
-package pl.lodz.p.cinema_management.domain.CinemaHall;
+package pl.lodz.p.cinema_management.domain.cinemahall;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

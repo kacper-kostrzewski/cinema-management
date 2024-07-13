@@ -1,4 +1,4 @@
-package pl.lodz.p.cinema_management.domain.CinemaHall;
+package pl.lodz.p.cinema_management.domain.cinemahall;
 
 import org.springframework.stereotype.Repository;
 

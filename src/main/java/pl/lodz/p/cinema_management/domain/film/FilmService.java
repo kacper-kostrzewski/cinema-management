@@ -1,4 +1,4 @@
-package pl.lodz.p.cinema_management.domain.Film;
+package pl.lodz.p.cinema_management.domain.film;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

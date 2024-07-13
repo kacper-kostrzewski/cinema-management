@@ -1,4 +1,4 @@
-package pl.lodz.p.cinema_management.api.Film;
+package pl.lodz.p.cinema_management.api.film;
 
 import java.time.LocalDate;
 

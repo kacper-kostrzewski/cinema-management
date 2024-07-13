@@ -3,10 +3,10 @@ package pl.lodz.p.cinema_management.external.rest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.lodz.p.cinema_management.api.Film.FilmDto;
-import pl.lodz.p.cinema_management.api.Film.FilmDtoMapper;
-import pl.lodz.p.cinema_management.domain.Film.Film;
-import pl.lodz.p.cinema_management.domain.Film.FilmService;
+import pl.lodz.p.cinema_management.api.film.FilmDto;
+import pl.lodz.p.cinema_management.api.film.FilmDtoMapper;
+import pl.lodz.p.cinema_management.domain.film.Film;
+import pl.lodz.p.cinema_management.domain.film.FilmService;
 
 import java.util.List;
 import java.util.Optional;

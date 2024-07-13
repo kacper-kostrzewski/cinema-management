@@ -1,9 +1,9 @@
-package pl.lodz.p.cinema_management.external.storage.CinemaHall;
+package pl.lodz.p.cinema_management.external.storage.cinemahall;
 
 import org.springframework.stereotype.Repository;
-import pl.lodz.p.cinema_management.api.CinemaHall.CinemaHallDtoMapper;
-import pl.lodz.p.cinema_management.domain.CinemaHall.CinemaHall;
-import pl.lodz.p.cinema_management.domain.CinemaHall.CinemaHallRepository;
+import pl.lodz.p.cinema_management.api.cinemahall.CinemaHallDtoMapper;
+import pl.lodz.p.cinema_management.domain.cinemahall.CinemaHall;
+import pl.lodz.p.cinema_management.domain.cinemahall.CinemaHallRepository;
 
 import java.util.*;
 

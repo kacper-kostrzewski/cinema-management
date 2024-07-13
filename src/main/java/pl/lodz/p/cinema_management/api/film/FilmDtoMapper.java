@@ -1,7 +1,7 @@
-package pl.lodz.p.cinema_management.api.Film;
+package pl.lodz.p.cinema_management.api.film;
 
 import org.mapstruct.Mapper;
-import pl.lodz.p.cinema_management.domain.Film.Film;
+import pl.lodz.p.cinema_management.domain.film.Film;
 
 @Mapper(componentModel = "spring")
 public interface FilmDtoMapper {
