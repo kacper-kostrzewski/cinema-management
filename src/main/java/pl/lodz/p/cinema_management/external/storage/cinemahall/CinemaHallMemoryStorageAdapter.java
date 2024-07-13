@@ -36,9 +36,8 @@ public class CinemaHallMemoryStorageAdapter implements CinemaHallRepository {
     }
 
     @Override
-    public CinemaHall update(Integer id, CinemaHall cinemaHall) {
-        cinemaHall.setId(id);
-        cinemaHalls.put(id, cinemaHall);
+    public CinemaHall update(CinemaHall cinemaHall) {
+        cinemaHalls.put(cinemaHall.getId(), cinemaHall);
         return cinemaHall;
     }
 

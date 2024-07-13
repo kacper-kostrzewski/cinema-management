@@ -36,9 +36,8 @@ public class FilmMemoryStorageAdapter implements FilmRepository {
     }
 
     @Override
-    public Film update(Integer id, Film film) {
-        film.setId(id);
-        films.put(id, film);
+    public Film update(Film film) {
+        films.put(film.getId(), film);
         return film;
     }
 

@@ -10,6 +10,6 @@ public interface FilmRepository {
     Film save(Film film);
     Optional<Film> findById(Integer id);
     List<Film> findAll();
-    Film update(Integer id, Film film);
+    Film update(Film film);
     void delete(Integer id);
 }

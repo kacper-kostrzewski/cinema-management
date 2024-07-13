@@ -23,8 +23,8 @@ public class FilmService {
         return filmRepository.findAll();
     }
 
-    public Film updateFilm(Integer id, Film film) {
-        return filmRepository.update(id, film);
+    public Film updateFilm(Film film) {
+        return filmRepository.update(film);
     }
 
     public void deleteFilm(Integer id) {

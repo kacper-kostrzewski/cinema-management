@@ -7,7 +7,7 @@ public record FilmDto(
         String title,
         String genre,
         String director,
-        String cast,
+        String stars,
         Integer duration,
         LocalDate releaseDate,
         String production,

@@ -10,6 +10,6 @@ public interface CinemaHallRepository {
     CinemaHall save(CinemaHall cinemaHall);
     Optional<CinemaHall> findById(Integer id);
     List<CinemaHall> findAll();
-    CinemaHall update(Integer id, CinemaHall cinemaHall);
+    CinemaHall update(CinemaHall cinemaHall);
     void delete(Integer id);
 }

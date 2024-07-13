@@ -6,7 +6,10 @@ import org.springframework.web.bind.annotation.*;
 import pl.lodz.p.cinema_management.api.cinemahall.CinemaHallDto;
 import pl.lodz.p.cinema_management.api.cinemahall.CinemaHallDtoMapper;
 import pl.lodz.p.cinema_management.domain.cinemahall.CinemaHall;
+import pl.lodz.p.cinema_management.domain.cinemahall.CinemaHallNotFoundException;
 import pl.lodz.p.cinema_management.domain.cinemahall.CinemaHallService;
+import pl.lodz.p.cinema_management.domain.film.Film;
+import pl.lodz.p.cinema_management.domain.film.FilmNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,13 +41,12 @@ public class CinemaHallController {
     }
 
     @PutMapping(path = "/{id}")
-    ResponseEntity<CinemaHallDto> updateCinemaHall(@PathVariable Integer id, @RequestBody CinemaHallDto cinemaHallDto) {
-        Optional<CinemaHall> cinemaHall = cinemaHallService.getCinemaHallById(id);
-        if(!cinemaHall.isPresent()) {
-            return ResponseEntity.notFound().build();
-        } else {
-            CinemaHall updatedCinemaHall = cinemaHallService.updateCinemaHall(id, cinemaHallDtoMapper.toDomain(cinemaHallDto));
+    ResponseEntity<CinemaHallDto> updateCinemaHall(@RequestBody CinemaHallDto cinemaHallDto) {
+        try {
+            CinemaHall updatedCinemaHall = cinemaHallService.updateCinemaHall(cinemaHallDtoMapper.toDomain(cinemaHallDto));
             return ResponseEntity.ok(cinemaHallDtoMapper.toDto(updatedCinemaHall));
+        } catch (CinemaHallNotFoundException e) {
+            return ResponseEntity.notFound().build();
         }
     }
 
