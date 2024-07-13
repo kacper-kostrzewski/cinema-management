@@ -4,7 +4,7 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "id": 0,
+  "id": null,
   "name": "Hall 1",
   "capacity": 50
 }

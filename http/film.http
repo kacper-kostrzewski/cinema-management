@@ -4,11 +4,11 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "id": 0,
+  "id": null,
   "title": "Suzme",
   "genre": "Anime, Action, Adventure",
   "director": "Makoto Shinkai",
-  "cast": "Nanoka Hara, Hokuto Matsumura, Eri Fukatsu",
+  "stars": "Nanoka Hara, Hokuto Matsumura, Eri Fukatsu",
   "duration": 121,
   "releaseDate": "2022-11-11",
   "production": "Japan",
@@ -36,7 +36,7 @@ Content-Type: application/json
   "title": "Your Name",
   "genre": "Anime, Drama, Fantasy",
   "director": "Makoto Shinkai",
-  "cast": "Ryunosuke Kamiki, Mone Kamishiraishi, Ryo Narita",
+  "stars": "Ryunosuke Kamiki, Mone Kamishiraishi, Ryo Narita",
   "duration": 107,
   "releaseDate": "2022-08-26",
   "production": "Japan",

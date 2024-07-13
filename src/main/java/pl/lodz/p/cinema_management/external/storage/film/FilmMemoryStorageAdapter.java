@@ -1,9 +1,9 @@
 package pl.lodz.p.cinema_management.external.storage.film;
 
 import org.springframework.stereotype.Repository;
-import pl.lodz.p.cinema_management.api.Film.FilmDtoMapper;
-import pl.lodz.p.cinema_management.domain.Film.Film;
-import pl.lodz.p.cinema_management.domain.Film.FilmRepository;
+import pl.lodz.p.cinema_management.api.film.FilmDtoMapper;
+import pl.lodz.p.cinema_management.domain.film.Film;
+import pl.lodz.p.cinema_management.domain.film.FilmRepository;
 
 import java.util.*;
 
@@ -36,9 +36,8 @@ public class FilmMemoryStorageAdapter implements FilmRepository {
     }
 
     @Override
-    public Film update(Integer id, Film film) {
-        film.setId(id);
-        films.put(id, film);
+    public Film update(Film film) {
+        films.put(film.getId(), film);
         return film;
     }
 

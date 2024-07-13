@@ -1,4 +1,4 @@
-package pl.lodz.p.cinema_management.domain.CinemaHall;
+package pl.lodz.p.cinema_management.domain.cinemahall;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,8 +23,8 @@ public class CinemaHallService {
         return cinemaHallRepository.findAll();
     }
 
-    public CinemaHall updateCinemaHall(Integer id, CinemaHall cinemaHall) {
-        return cinemaHallRepository.update(id, cinemaHall);
+    public CinemaHall updateCinemaHall(CinemaHall cinemaHall) {
+        return cinemaHallRepository.update(cinemaHall);
     }
 
     public void deleteCinemaHall(Integer id) {

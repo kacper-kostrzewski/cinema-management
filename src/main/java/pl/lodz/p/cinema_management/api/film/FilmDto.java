@@ -1,4 +1,4 @@
-package pl.lodz.p.cinema_management.api.Film;
+package pl.lodz.p.cinema_management.api.film;
 
 import java.time.LocalDate;
 
@@ -7,7 +7,7 @@ public record FilmDto(
         String title,
         String genre,
         String director,
-        String cast,
+        String stars,
         Integer duration,
         LocalDate releaseDate,
         String production,

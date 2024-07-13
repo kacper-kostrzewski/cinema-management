@@ -1,4 +1,4 @@
-package pl.lodz.p.cinema_management.domain.Film;
+package pl.lodz.p.cinema_management.domain.film;
 
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +10,6 @@ public interface FilmRepository {
     Film save(Film film);
     Optional<Film> findById(Integer id);
     List<Film> findAll();
-    Film update(Integer id, Film film);
+    Film update(Film film);
     void delete(Integer id);
 }
