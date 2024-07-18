@@ -1,4 +1,4 @@
-package com.smalaca.annotation.ddd;
+package pl.lodz.p.cinema_management.annotation.ddd;
 
 public @interface Saga {
 }
