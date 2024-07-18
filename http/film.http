@@ -1,5 +1,5 @@
 ### Add Film
-POST http://localhost:8080/api/v1/film
+POST http://localhost:8080/api/films
 Accept: application/json
 Content-Type: application/json
 
@@ -15,19 +15,18 @@ Content-Type: application/json
   "synopsis": "A modern action adventure road story where a 17-year-old girl named Suzume helps a mysterious young man close doors from the other side that are releasing disasters all over in Japan."
 }
 
-
 ### Get All Films
-GET http://localhost:8080/api/v1/film
+GET http://localhost:8080/api/films
 Accept: application/json
 Content-Type: application/json
 
 ### Get Film by ID
-GET http://localhost:8080/api/v1/film/2
+GET http://localhost:8080/api/films/2
 Accept: application/json
 Content-Type: application/json
 
 ### Update Film
-PUT http://localhost:8080/api/v1/film/2
+PUT http://localhost:8080/api/films/1
 Accept: application/json
 Content-Type: application/json
 
@@ -44,6 +43,6 @@ Content-Type: application/json
 }
 
 ### Delete Film
-DELETE http://localhost:8080/api/v1/film/1
+DELETE http://localhost:8080/api/films/1
 Accept: application/json
 Content-Type: application/json

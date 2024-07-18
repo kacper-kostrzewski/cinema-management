@@ -1,4 +1,4 @@
-package com.smalaca.annotation.architecture;
+package pl.lodz.p.cinema_management.annotation.architecture;
 
 public @interface PrimaryPort {
 }
