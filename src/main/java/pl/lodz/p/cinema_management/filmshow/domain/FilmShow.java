@@ -1,10 +1,7 @@
 package pl.lodz.p.cinema_management.filmshow.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import pl.lodz.p.cinema_management.annotation.ddd.AggregateRoot;
 import pl.lodz.p.cinema_management.filmshow.domain.film.Film;
@@ -18,6 +15,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode(of = "id")
+@Table(name = "film_shows")
 public class FilmShow {
 
     @Id

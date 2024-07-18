@@ -1,9 +1,8 @@
-package pl.lodz.p.cinema_management.filmshow.domain.cinemahall;
-
-import lombok.*;
-import pl.lodz.p.cinema_management.annotation.ddd.AggregateRoot;
+package pl.lodz.p.cinema_management.user.domain;
 
 import jakarta.persistence.*;
+import lombok.*;
+import pl.lodz.p.cinema_management.annotation.ddd.AggregateRoot;
 
 @AggregateRoot
 @Entity
@@ -12,18 +11,17 @@ import jakarta.persistence.*;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
-@Table(name = "cinema_halls")
-public class CinemaHall {
+@Table(name = "users")
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cinemaHallId")
     private Integer id;
 
     @Column(nullable = false)
-    private String name;
+    private String email;
 
     @Column(nullable = false)
-    private Integer capacity;
+    private String password;
 
 }

@@ -1,12 +1,9 @@
 package pl.lodz.p.cinema_management.filmshow.domain.film;
 
+import lombok.*;
 import pl.lodz.p.cinema_management.annotation.ddd.AggregateRoot;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.LocalDate;
 
@@ -16,6 +13,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode(of = "id")
+@Table(name = "films")
 public class Film {
 
     @Id
