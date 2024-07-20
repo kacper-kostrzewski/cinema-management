@@ -15,6 +15,7 @@ public class CinemaHallService {
     }
 
     public CinemaHall addCinemaHall(CinemaHall cinemaHall) {
+        cinemaHall.generateSeats(); // I'm not sure if this should be here
         return cinemaHallRepository.save(cinemaHall);
     }
 
@@ -27,6 +28,7 @@ public class CinemaHallService {
     }
 
     public CinemaHall updateCinemaHall(CinemaHall cinemaHall) {
+        cinemaHall.generateSeats(); // I'm not sure if this should be here
         return cinemaHallRepository.update(cinemaHall);
     }
 

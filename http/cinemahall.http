@@ -6,7 +6,7 @@ Content-Type: application/json
 {
   "id": null,
   "name": "Hall D",
-  "capacity": 100
+  "capacity": 20
 }
 
 ### Get All Cinema Halls
@@ -15,7 +15,7 @@ Accept: application/json
 Content-Type: application/json
 
 ### Get Cinema Hall by ID
-GET http://localhost:8080/api/cinema_halls/2
+GET http://localhost:8080/api/cinema_halls/4
 Accept: application/json
 Content-Type: application/json
 
@@ -27,10 +27,10 @@ Content-Type: application/json
 {
   "id": 4,
   "name": "Hall D",
-  "capacity": 50
+  "capacity": 10
 }
 
 ### Delete Cinema Hall
-DELETE http://localhost:8080/api/cinema_halls/1
+DELETE http://localhost:8080/api/cinema_halls/4
 Accept: application/json
 Content-Type: application/json
