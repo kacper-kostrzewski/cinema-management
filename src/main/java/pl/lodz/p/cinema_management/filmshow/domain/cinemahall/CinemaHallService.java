@@ -7,7 +7,6 @@ import java.util.Optional;
 
 @Service
 public class CinemaHallService {
-
     private final CinemaHallRepository cinemaHallRepository;
 
     public CinemaHallService(CinemaHallRepository cinemaHallRepository) {
@@ -15,7 +14,6 @@ public class CinemaHallService {
     }
 
     public CinemaHall addCinemaHall(CinemaHall cinemaHall) {
-        cinemaHall.generateSeats(); // I'm not sure if this should be here
         return cinemaHallRepository.save(cinemaHall);
     }
 
@@ -28,12 +26,10 @@ public class CinemaHallService {
     }
 
     public CinemaHall updateCinemaHall(CinemaHall cinemaHall) {
-        cinemaHall.generateSeats(); // I'm not sure if this should be here
         return cinemaHallRepository.update(cinemaHall);
     }
 
     public void deleteCinemaHall(Integer id) {
         cinemaHallRepository.delete(id);
     }
-
 }

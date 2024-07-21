@@ -6,7 +6,7 @@ Content-Type: application/json
 {
   "id": null,
   "name": "Hall D",
-  "capacity": 20
+  "capacity": 10
 }
 
 ### Get All Cinema Halls

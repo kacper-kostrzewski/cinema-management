@@ -7,11 +7,9 @@ import java.util.Optional;
 
 @Repository
 public interface CinemaHallRepository {
-
     CinemaHall save(CinemaHall cinemaHall);
     Optional<CinemaHall> findById(Integer id);
     List<CinemaHall> findAll();
     CinemaHall update(CinemaHall cinemaHall);
     void delete(Integer id);
-
 }
