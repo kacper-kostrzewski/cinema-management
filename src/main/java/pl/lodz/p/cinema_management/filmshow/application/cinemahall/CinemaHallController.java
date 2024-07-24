@@ -32,9 +32,7 @@ public class CinemaHallController {
     @GetMapping(path = "/{id}")
     ResponseEntity<CinemaHallDto> getCinemaHallById(@PathVariable Integer id) {
         Optional<CinemaHall> cinemaHall = cinemaHallService.getCinemaHallById(id);
-        if(cinemaHall.isPresent()) {
-            return ResponseEntity.ok(cinemaHallDtoMapper.toDto(cinemaHall.get()));
-        } else return ResponseEntity.notFound().build();
+        return cinemaHall.map(hall -> ResponseEntity.ok(cinemaHallDtoMapper.toDto(hall))).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PutMapping(path = "/{id}")

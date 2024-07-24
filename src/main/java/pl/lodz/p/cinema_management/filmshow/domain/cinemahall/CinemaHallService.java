@@ -7,7 +7,6 @@ import java.util.Optional;
 
 @Service
 public class CinemaHallService {
-
     private final CinemaHallRepository cinemaHallRepository;
 
     public CinemaHallService(CinemaHallRepository cinemaHallRepository) {
@@ -33,5 +32,4 @@ public class CinemaHallService {
     public void deleteCinemaHall(Integer id) {
         cinemaHallRepository.delete(id);
     }
-
 }

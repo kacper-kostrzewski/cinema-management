@@ -7,11 +7,9 @@ import java.util.Optional;
 
 @Repository
 public interface FilmShowRepository {
-
     FilmShow save(FilmShow filmShow);
     Optional<FilmShow> findById(Integer id);
     List<FilmShow> findAll();
     FilmShow update(FilmShow filmShow);
     void delete(Integer id);
-
 }

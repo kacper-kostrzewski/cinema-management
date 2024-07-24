@@ -14,7 +14,6 @@ import jakarta.persistence.*;
 @EqualsAndHashCode(of = "id")
 @Table(name = "cinema_halls")
 public class CinemaHall {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cinemaHallId")
@@ -25,5 +24,4 @@ public class CinemaHall {
 
     @Column(nullable = false)
     private Integer capacity;
-
 }

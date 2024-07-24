@@ -1,0 +1,15 @@
+### Generate ticket
+POST http://localhost:8080/api/tickets
+Accept: application/json
+Content-Type: application/json
+
+{
+  "filmShowId": 1,
+  "seatId": 1,
+  "userId": 1
+}
+
+### Get all tickets
+GET http://localhost:8080/api/tickets
+Accept: application/json
+Content-Type: application/json

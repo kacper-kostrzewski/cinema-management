@@ -3,11 +3,15 @@ package pl.lodz.p.cinema_management.filmshow.application;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
+
+import pl.lodz.p.cinema_management.filmshow.application.cinemahall.CinemaHallDtoMapper;
+import pl.lodz.p.cinema_management.filmshow.application.seat.SeatDtoMapper;
+import pl.lodz.p.cinema_management.filmshow.application.film.FilmDtoMapper;
 import pl.lodz.p.cinema_management.filmshow.domain.FilmShow;
 import pl.lodz.p.cinema_management.filmshow.domain.cinemahall.CinemaHall;
 import pl.lodz.p.cinema_management.filmshow.domain.film.Film;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {FilmDtoMapper.class, CinemaHallDtoMapper.class, SeatDtoMapper.class})
 public interface FilmShowDtoMapper {
 
     @Mapping(source = "film", target = "filmId", qualifiedByName = "filmToId")

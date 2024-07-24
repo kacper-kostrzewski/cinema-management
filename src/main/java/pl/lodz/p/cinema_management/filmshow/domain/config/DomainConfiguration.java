@@ -9,18 +9,21 @@ import pl.lodz.p.cinema_management.filmshow.domain.cinemahall.CinemaHallReposito
 import pl.lodz.p.cinema_management.filmshow.domain.cinemahall.CinemaHallService;
 import pl.lodz.p.cinema_management.filmshow.domain.film.FilmRepository;
 import pl.lodz.p.cinema_management.filmshow.domain.film.FilmService;
+import pl.lodz.p.cinema_management.filmshow.domain.seat.SeatRepository;
+import pl.lodz.p.cinema_management.filmshow.domain.seat.SeatService;
 import pl.lodz.p.cinema_management.filmshow.infrastructure.FilmShowDatabaseStorageAdapter;
 import pl.lodz.p.cinema_management.filmshow.infrastructure.JpaFilmShowRepository;
 import pl.lodz.p.cinema_management.filmshow.infrastructure.cinemahall.CinemaHallDatabaseStorageAdapter;
 import pl.lodz.p.cinema_management.filmshow.infrastructure.cinemahall.JpaCinemaHallRepository;
 import pl.lodz.p.cinema_management.filmshow.infrastructure.film.FilmDatabaseStorageAdapter;
 import pl.lodz.p.cinema_management.filmshow.infrastructure.film.JpaFilmRepository;
+import pl.lodz.p.cinema_management.filmshow.infrastructure.seat.JpaSeatRepository;
+import pl.lodz.p.cinema_management.filmshow.infrastructure.seat.SeatDatabaseStorageAdapter;
 
 
 @Configuration
 @ConfigurationProperties("domain.properties")
 public class DomainConfiguration {
-
     @Bean
     public FilmRepository filmRepository(JpaFilmRepository jpaFilmRepository) {
         return new FilmDatabaseStorageAdapter(jpaFilmRepository);
@@ -47,8 +50,20 @@ public class DomainConfiguration {
     }
 
     @Bean
-    public FilmShowService filmShowService(FilmShowRepository filmShowRepository) {
-        return new FilmShowService(filmShowRepository);
+    public FilmShowService filmShowService(FilmShowRepository filmShowRepository, CinemaHallRepository cinemaHallRepository) {
+        return new FilmShowService(filmShowRepository, cinemaHallRepository);
     }
+
+    @Bean
+    public SeatRepository seatRepository(JpaSeatRepository jpaSeatRepository) {
+        return new SeatDatabaseStorageAdapter(jpaSeatRepository);
+    }
+
+    @Bean
+    public SeatService seatService(SeatRepository seatRepository, FilmShowRepository filmShowRepository) {
+        return new SeatService(seatRepository, filmShowRepository);
+    }
+
+
 
 }

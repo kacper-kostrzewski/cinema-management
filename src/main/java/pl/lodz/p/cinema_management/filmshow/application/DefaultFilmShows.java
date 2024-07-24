@@ -25,9 +25,9 @@ public class DefaultFilmShows implements CommandLineRunner {
     private final FilmService filmService;
 
     private final CinemaHallDto cinemaHalls[] = {
-            new CinemaHallDto(null, "Hall A", 150),
-            new CinemaHallDto(null, "Hall B", 200),
-            new CinemaHallDto(null, "Hall C", 250)
+            new CinemaHallDto(null, "Hall A", 30),
+            new CinemaHallDto(null, "Hall B", 40),
+            new CinemaHallDto(null, "Hall C", 50)
     };
 
     private final FilmDto films[] = {
