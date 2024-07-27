@@ -8,14 +8,10 @@ import pl.lodz.p.cinema_management.ticket.domain.Ticket;
 public interface TicketDtoMapper {
 
     @Mapping(source = "filmShowId", target = "filmShow.id")
-    @Mapping(source = "seatId", target = "seat.id")
+    @Mapping(source = "rowNumber", target = "seat.rowNumber")
+    @Mapping(source = "seatNumber", target = "seat.seatNumber")
     @Mapping(source = "userId", target = "user.id")
     Ticket toDomain(TicketRequestDto dto);
-
-    @Mapping(source = "filmShow", target = "filmShow")
-    @Mapping(source = "seat", target = "seat")
-    @Mapping(source = "user", target = "user")
-    TicketResponseDto toResponseDto(Ticket entity);
 
     @Mapping(source = "id", target = "ticketNumber")
     @Mapping(source = "filmShow.film.title", target = "filmTitle")

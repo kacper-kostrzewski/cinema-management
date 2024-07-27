@@ -1,4 +1,4 @@
-### Add Film
+### Add Film Show
 POST http://localhost:8080/api/film_shows
 Accept: application/json
 Content-Type: application/json
@@ -6,33 +6,33 @@ Content-Type: application/json
 {
   "id": null,
   "filmId": 3,
-  "cinemaHallId": 3,
-  "startTime": "2024-07-21T10:00:00"
+  "cinemaHallId": 1,
+  "startTime": "2024-08-27T18:30:00"
 }
 
-### Get All Films
+### Get All Film Shows
 GET http://localhost:8080/api/film_shows
 Accept: application/json
 Content-Type: application/json
 
-### Get Film by ID
-GET http://localhost:8080/api/film_shows/2
+### Get Film Show by ID
+GET http://localhost:8080/api/film_shows/1
 Accept: application/json
 Content-Type: application/json
 
-### Update Film
+### Update Film Show
 PUT http://localhost:8080/api/film_shows/1
 Accept: application/json
 Content-Type: application/json
 
 {
-  "id": 1,
+  "id": 6,
   "filmId": 1,
   "cinemaHallId": 1,
   "startTime": "2024-07-21T22:00:00"
 }
 
-### Delete Film
+### Delete Film Show
 DELETE http://localhost:8080/api/film_shows/1
 Accept: application/json
 Content-Type: application/json

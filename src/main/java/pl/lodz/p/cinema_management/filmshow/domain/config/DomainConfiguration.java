@@ -60,8 +60,8 @@ public class DomainConfiguration {
     }
 
     @Bean
-    public SeatService seatService(SeatRepository seatRepository, FilmShowRepository filmShowRepository) {
-        return new SeatService(seatRepository, filmShowRepository);
+    public SeatService seatService(SeatRepository seatRepository) {
+        return new SeatService(seatRepository);
     }
 
 

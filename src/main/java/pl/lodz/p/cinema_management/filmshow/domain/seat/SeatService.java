@@ -1,37 +1,37 @@
 package pl.lodz.p.cinema_management.filmshow.domain.seat;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.lodz.p.cinema_management.filmshow.domain.FilmShow;
-import pl.lodz.p.cinema_management.filmshow.domain.FilmShowNotFoundException;
-import pl.lodz.p.cinema_management.filmshow.domain.FilmShowRepository;
 
 @Service
+@AllArgsConstructor
 public class SeatService {
 
     private final SeatRepository seatRepository;
-    private final FilmShowRepository filmShowRepository;
 
+    public Seat findAndReserveSeat(Integer filmShowId, Integer rowNumber, Integer seatNumber) {
+        // Find the seat by row number, seat number, and film show ID
+        Seat seat = seatRepository.findAll().stream()
+                .filter(s -> s.getRowNumber().equals(rowNumber) &&
+                        s.getSeatNumber().equals(seatNumber) &&
+                        s.getFilmShow().getId().equals(filmShowId))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Seat does not belong to the specified film show"));
 
-    public SeatService(SeatRepository seatRepository, FilmShowRepository filmShowRepository) {
-        this.seatRepository = seatRepository;
-        this.filmShowRepository = filmShowRepository;
+        // Check if the seat is already occupied
+        if (seat.getSeatStatus() == SeatStatus.OCCUPIED) {
+            throw new IllegalStateException("Seat is already occupied");
+        }
+
+        // If the seat is not occupied update the seat status to occupied
+        seat.setSeatStatus(SeatStatus.OCCUPIED);
+        seatRepository.save(seat);
+
+        return seat;
     }
 
-    public void changeSeatStatus(Integer filmShowId, Integer rowNumber, Integer seatNumber, SeatStatus newStatus) {
-        // Find the FilmShow
-        FilmShow filmShow = filmShowRepository.findById(filmShowId)
-                .orElseThrow(FilmShowNotFoundException::new);
-
-        // Find the Seat in the FilmShow
-        Seat seat = filmShow.getSeats().stream()
-                .filter(s -> s.getRowNumber().equals(rowNumber) && s.getSeatNumber().equals(seatNumber))
-                .findFirst()
-                .orElseThrow(SeatNotFoundException::new);
-
-        // Update the seat status
-        seat.setSeatStatus(newStatus);
-
-        // Save the updated seat (or update FilmShow if necessary)
+    public void releaseSeat(Seat seat) {
+        seat.setSeatStatus(SeatStatus.AVAILABLE);
         seatRepository.save(seat);
     }
 

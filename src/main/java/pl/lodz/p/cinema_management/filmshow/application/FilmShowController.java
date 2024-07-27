@@ -18,9 +18,9 @@ public class FilmShowController {
     private final FilmShowDtoMapper filmShowDtoMapper;
 
     @PostMapping
-    ResponseEntity<AddFilmShowDto> addFilmShow(@RequestBody AddFilmShowDto addFilmShowDto) {
-        FilmShow filmShow = filmShowService.addFilmShow(filmShowDtoMapper.toDomain(addFilmShowDto));
-        return ResponseEntity.ok(filmShowDtoMapper.addFilmShowDto(filmShow));
+    ResponseEntity<CreateFilmShowDto> addFilmShow(@RequestBody CreateFilmShowDto createFIlmShowDto) {
+        FilmShow filmShow = filmShowService.addFilmShow(filmShowDtoMapper.toDomain(createFIlmShowDto));
+        return ResponseEntity.ok(filmShowDtoMapper.toResponseDto(filmShow));
     }
 
     @GetMapping
@@ -35,10 +35,10 @@ public class FilmShowController {
     }
 
     @PutMapping(path = "/{id}")
-    ResponseEntity<AddFilmShowDto> updateFilmShow(@RequestBody AddFilmShowDto addFilmShowDto) {
+    ResponseEntity<CreateFilmShowDto> updateFilmShow(@RequestBody CreateFilmShowDto createFIlmShowDto) {
         try {
-            FilmShow updatedFilmShow = filmShowService.updateFilmShow(filmShowDtoMapper.toDomain(addFilmShowDto));
-            return ResponseEntity.ok(filmShowDtoMapper.addFilmShowDto(updatedFilmShow));
+            FilmShow updatedFilmShow = filmShowService.updateFilmShow(filmShowDtoMapper.toDomain(createFIlmShowDto));
+            return ResponseEntity.ok(filmShowDtoMapper.toResponseDto(updatedFilmShow));
         } catch (FilmShowNotFoundException e) {
             return ResponseEntity.notFound().build();
         }

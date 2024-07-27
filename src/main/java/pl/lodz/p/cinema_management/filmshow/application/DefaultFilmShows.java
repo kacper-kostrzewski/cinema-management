@@ -26,8 +26,8 @@ public class DefaultFilmShows implements CommandLineRunner {
 
     private final CinemaHallDto cinemaHalls[] = {
             new CinemaHallDto(null, "Hall A", 30),
-            new CinemaHallDto(null, "Hall B", 40),
-            new CinemaHallDto(null, "Hall C", 50)
+            new CinemaHallDto(null, "Hall B", 20),
+            new CinemaHallDto(null, "Hall C", 40)
     };
 
     private final FilmDto films[] = {
@@ -36,11 +36,11 @@ public class DefaultFilmShows implements CommandLineRunner {
             new FilmDto(null, "Interstellar", "Sci-Fi", "Christopher Nolan", "Matthew McConaughey, Anne Hathaway", 169, LocalDate.of(2014, 11, 7), "Paramount Pictures", "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.")
     };
 
-    private final AddFilmShowDto filmShows[] = {
-            new AddFilmShowDto(null, 1, 1, LocalDateTime.of(2024, 7, 18, 18, 0)),
-            new AddFilmShowDto(null, 2, 2, LocalDateTime.of(2024, 7, 19, 20, 0)),
-            new AddFilmShowDto(null, 3, 3, LocalDateTime.of(2024, 7, 20, 21, 0)),
-            new AddFilmShowDto(null, 1, 2, LocalDateTime.of(2024, 7, 21, 22, 0))
+    private final CreateFilmShowDto filmShows[] = {
+            new CreateFilmShowDto(null, 1, 1, LocalDateTime.of(2024, 8, 1, 18, 0)),
+            new CreateFilmShowDto(null, 2, 2, LocalDateTime.of(2024, 8, 1, 20, 0)),
+            new CreateFilmShowDto(null, 3, 3, LocalDateTime.of(2024, 8, 2, 21, 0)),
+            new CreateFilmShowDto(null, 1, 2, LocalDateTime.of(2024, 8, 2, 22, 0))
     };
 
     @Override
@@ -51,7 +51,7 @@ public class DefaultFilmShows implements CommandLineRunner {
         for (FilmDto film : films) {
             filmService.addFilm(filmDtoMapper.toDomain(film));
         }
-        for (AddFilmShowDto filmShow : filmShows) {
+        for (CreateFilmShowDto filmShow : filmShows) {
             filmShowService.addFilmShow(filmShowDtoMapper.toDomain(filmShow));
         }
     }
