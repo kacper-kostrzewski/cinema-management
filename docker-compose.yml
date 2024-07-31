@@ -18,6 +18,23 @@ services:
       - postgres
     restart: unless-stopped
 
+  postgres-it:
+    container_name: postgres-it
+    image: postgres:alpine
+    ports:
+      - "5332:5432"
+    environment:
+      - POSTGRES_DB=db
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - PGDATA=var/lib/postgresql/data
+    command: [ "postgres", "-c", "log_statement=all" ]
+    networks:
+      - postgres
+    restart: unless-stopped
+    depends_on:
+      - db
+
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4

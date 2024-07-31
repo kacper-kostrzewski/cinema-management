@@ -1,27 +1,54 @@
 package pl.lodz.p.cinema_management.user.domain;
 
-import jakarta.persistence.*;
-import lombok.*;
-import pl.lodz.p.cinema_management.annotation.ddd.AggregateRoot;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.ToString;
 
-@AggregateRoot
-@Entity
-@NoArgsConstructor
+import java.util.Objects;
+
+@Data
 @AllArgsConstructor
-@Getter
-@Setter
-@EqualsAndHashCode(of = "id")
-@Table(name = "users")
+@ToString
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    Integer id;
+    String email;
+    String name;
+    String password;
+    UserRole role;
 
-    @Column(nullable = false)
-    private String email;
 
-    @Column(nullable = false)
-    private String password;
+    public User withPassword(String newPassword) {
+        return new User(
+                id,
+                email,
+                name,
+                newPassword,
+                role);
+    }
 
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        final User user = (User) o;
+
+        if (!Objects.equals(id, user.id)) return false;
+        if (!Objects.equals(email, user.email)) return false;
+        if (!Objects.equals(name, user.name)) return false;
+        if (!Objects.equals(password, user.password)) return false;
+        if (!Objects.equals(role, user.role)) return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (role != null ? role.hashCode() : 0);
+        return result;
+    }
 }
