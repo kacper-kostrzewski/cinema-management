@@ -41,7 +41,7 @@ Content-Type: application/json
 %}
 
 ### get reservation by id
-GET http://localhost:8080/api/v1/reservations/res1
+GET http://localhost:8080/api/v1/reservations/res2
 Accept: application/json
 Content-Type: application/json
 Authorization: {{auth_token}}

@@ -1,11 +1,11 @@
 package pl.lodz.p.cinema_management;
 
+import pl.lodz.p.cinema_management.user.domain.User;
+import pl.lodz.p.cinema_management.user.domain.UserRole;
+import pl.lodz.p.cinema_management.user.domain.UserService;
 import lombok.extern.java.Log;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import pl.lodz.p.cinema_management.user.application.UserService;
-import pl.lodz.p.cinema_management.user.domain.User;
-import pl.lodz.p.cinema_management.user.domain.UserRole;
 
 @Component
 @Log
@@ -33,7 +33,7 @@ public class DefaultUsers implements CommandLineRunner {
             UserRole.VIP
     );
 
-    private final User regularUser = new User(
+    private final User medicalDoctorUser = new User(
             null,
             "user@gmail.com",
             "User",
@@ -46,7 +46,7 @@ public class DefaultUsers implements CommandLineRunner {
         try {
             addUser(adminUser);
             addUser(vipUser);
-            addUser(regularUser);
+            addUser(medicalDoctorUser);
         } catch (Exception ex) {
             log.warning(ex.getMessage());
         }

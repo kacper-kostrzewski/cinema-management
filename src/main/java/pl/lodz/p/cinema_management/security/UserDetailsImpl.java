@@ -1,10 +1,10 @@
 package pl.lodz.p.cinema_management.security;
 
+import pl.lodz.p.cinema_management.user.domain.User;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import pl.lodz.p.cinema_management.user.domain.User;
 
 import java.util.Collection;
 import java.util.List;

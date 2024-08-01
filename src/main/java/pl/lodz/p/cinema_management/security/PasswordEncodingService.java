@@ -1,10 +1,9 @@
 package pl.lodz.p.cinema_management.security;
 
+import pl.lodz.p.cinema_management.user.domain.EncodingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import pl.lodz.p.cinema_management.user.domain.EncodingService;
-
 
 @Component
 @RequiredArgsConstructor

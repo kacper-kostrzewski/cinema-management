@@ -1,14 +1,13 @@
 package pl.lodz.p.cinema_management.security;
 
+import pl.lodz.p.cinema_management.user.domain.User;
+import pl.lodz.p.cinema_management.user.domain.UserNotFoundException;
+import pl.lodz.p.cinema_management.user.infrastructure.storage.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import pl.lodz.p.cinema_management.user.domain.User;
-import pl.lodz.p.cinema_management.user.domain.UserNotFoundException;
-import pl.lodz.p.cinema_management.user.domain.UserRepository;
-
 
 @Service
 @AllArgsConstructor
