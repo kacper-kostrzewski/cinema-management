@@ -1,0 +1,108 @@
+### login admin
+POST http://localhost:8080/api/v1/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "username": "admin@gmail.com",
+  "password": "password"
+}
+
+> {%
+    client.global.set("auth_token", "Bearer " + response.body.token);
+%}
+
+### login vip
+POST http://localhost:8080/api/v1/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "username": "vip@gmail.com",
+  "password": "password"
+}
+
+> {%
+    client.global.set("auth_token", "Bearer " + response.body.token);
+%}
+
+### login user
+POST http://localhost:8080/api/v1/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "username": "user@gmail.com",
+  "password": "password"
+}
+
+> {%
+    client.global.set("auth_token", "Bearer " + response.body.token);
+%}
+
+### get reservation by id
+GET http://localhost:8080/api/v1/reservations/res2
+Accept: application/json
+Content-Type: application/json
+Authorization: {{auth_token}}
+
+
+#### delete reservation
+#DELETE http://localhost:8080/api/v1/reservations/res1
+#Accept: application/json
+#Content-Type: application/json
+#Authorization: {{auth_token}}
+
+### get all reservations
+GET http://localhost:8080/api/v1/reservations
+Accept: application/json
+Content-Type: application/json
+Authorization: {{auth_token}}
+
+### get all reservations
+GET http://localhost:8080/api/v1/reservations?page=2&size=3
+Accept: application/json
+Content-Type: application/json
+Authorization: {{auth_token}}
+
+### book seats
+POST http://localhost:8080/api/v1/reservations/res2/book
+Accept: application/json
+Content-Type: application/json
+Authorization: {{auth_token}}
+
+{
+  "seatNumbers": [1, 2, 3, 4]
+}
+
+### book seats on behalf of the user
+POST http://localhost:8080/api/v1/reservations/res2/book
+Accept: application/json
+Content-Type: application/json
+Authorization: {{auth_token}}
+
+{
+  "seatNumbers": [1, 2, 3, 4],
+  "userId": 3
+}
+
+### release seats
+POST http://localhost:8080/api/v1/reservations/res2/release
+Accept: application/json
+Content-Type: application/json
+Authorization: {{auth_token}}
+
+{
+  "seatNumbers": [2, 3]
+}
+
+### create reservation
+POST http://localhost:8080/api/v1/reservations
+Accept: application/json
+Content-Type: application/json
+Authorization: {{auth_token}}
+
+{
+  "reservationNumber": "res3",
+  "amountOfSeats": 3
+}

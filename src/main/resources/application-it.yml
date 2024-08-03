@@ -1,0 +1,24 @@
+server:
+    port: 0
+
+cors:
+    allowed-origins: "*"
+    allowed-methods: "*"
+    allowed-headers: "*"
+    exposed-headers: "*"
+
+spring:
+    application:
+        name: cinema-management
+    datasource:
+        url: jdbc:postgresql://localhost:5332/db
+        username: root
+        password: root
+    jpa:
+        hibernate:
+            ddl-auto: create
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+                format_sql: true
+        show-sql: true

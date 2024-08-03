@@ -1,37 +1,44 @@
 package pl.lodz.p.cinema_management.user.domain;
 
+import pl.lodz.p.cinema_management.user.infrastructure.storage.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-
 @Service
-public class UserService{
+@RequiredArgsConstructor
+public class UserService {
 
     private final UserRepository userRepository;
+    private final EncodingService encoder;
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public User save(User user) {
+        return userRepository.save(
+                user.withPassword(
+                        encoder.encode(user.getPassword())
+                )
+        );
     }
 
-    public User addUser(User user) {
-        return userRepository.save(user);
+    public void update(User user) {
+        userRepository.update(user);
     }
 
-    public Optional<User> getUserById(Integer id) {
-        return userRepository.findById(id);
+    public void removeById(Integer id) {
+        userRepository.remove(id);
     }
 
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(UserNotFoundException::new);
     }
 
-    public User updateUser(User user) {
-        return userRepository.update(user);
+    public User findById(Integer id) {
+        return userRepository.findById(id)
+                .orElseThrow(UserNotFoundException::new);
     }
 
-    public void deleteUser(Integer id) {
-        userRepository.delete(id);
+    public PageUser findAll(Pageable pageable) {
+        return userRepository.findAll(pageable);
     }
-
 }
