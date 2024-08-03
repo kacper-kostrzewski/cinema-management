@@ -14,12 +14,10 @@ public class ReservationService {
 
     private final ReservationRepository reservationRepository;
     private final AuthenticationService authenticationService;
-    private final HallService hallService;
+    private final CinemaHallService cinemaHallService;
 
     public Reservation create(final CreateUsingCinemaHallCommand command) {
-
-        CinemaHall cinemaHall = hallService.getCinemaHallById(command.cinemaHallId());
-
+        CinemaHall cinemaHall = cinemaHallService.getCinemaHallById(command.cinemaHallId());
         return reservationRepository.save(ReservationFactory.createReservation(command.reservationNumber(), cinemaHall));
     }
 

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
-public interface HallMapper {
+public interface CinemaHallMapper {
 
     @Mapping(target = "seatsIdentifiers", source = "seats", qualifiedByName = "mapSeatsToIdentifiers")
     CinemaHall toReservationContext(pl.lodz.p.cinema_management.cinemahall.domain.CinemaHall cinemaHall);
