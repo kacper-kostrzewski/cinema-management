@@ -1,9 +1,6 @@
 package pl.lodz.p.cinema_management.reservation.api;
 
-import pl.lodz.p.cinema_management.reservation.command.application.BookCommand;
-import pl.lodz.p.cinema_management.reservation.command.application.CreateCommand;
-import pl.lodz.p.cinema_management.reservation.command.application.ReleaseCommand;
-import pl.lodz.p.cinema_management.reservation.command.application.ReservationService;
+import pl.lodz.p.cinema_management.reservation.command.application.*;
 import pl.lodz.p.cinema_management.reservation.query.facade.PageReservationDto;
 import pl.lodz.p.cinema_management.reservation.query.facade.ReservationDto;
 import pl.lodz.p.cinema_management.reservation.query.facade.ReservationFacade;
@@ -25,7 +22,7 @@ class ReservationController {
     private final ReservationService reservationService;
 
     @PostMapping
-    public ResponseEntity<Void> createReservation(@RequestBody CreateCommand createCommand){
+    public ResponseEntity<Void> createReservation(@RequestBody CreateUsingCinemaHallCommand createCommand){
         reservationService.create(createCommand);
         return ResponseEntity.ok().build();
     }

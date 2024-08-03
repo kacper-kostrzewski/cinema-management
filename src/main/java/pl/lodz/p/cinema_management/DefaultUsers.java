@@ -1,5 +1,6 @@
 package pl.lodz.p.cinema_management;
 
+import org.springframework.core.annotation.Order;
 import pl.lodz.p.cinema_management.user.domain.User;
 import pl.lodz.p.cinema_management.user.domain.UserRole;
 import pl.lodz.p.cinema_management.user.domain.UserService;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Log
+@Order(1)
 public class DefaultUsers implements CommandLineRunner {
 
     private final UserService userService;

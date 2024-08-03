@@ -1,15 +1,12 @@
 package pl.lodz.p.cinema_management.reservation.command.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
+@Entity(name = "ReservationSeat")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,14 +18,18 @@ public class Seat {
     @Column(
             nullable = false
     )
-    Integer seatNumber;
+    String seatIdentifier;
     @Column(
             nullable = true
     )
     Integer takenBy;
 
-    Seat(final Integer seatNumber, final Integer takenBy) {
-        this.seatNumber = seatNumber;
+    Seat(final String seatIdentifier) {
+        this.seatIdentifier = seatIdentifier;
+    }
+
+    Seat(final String seatIdentifier, final Integer takenBy) {
+        this.seatIdentifier = seatIdentifier;
         this.takenBy = takenBy;
     }
 

@@ -4,9 +4,9 @@ import java.util.List;
 
 public class UserReleasingPolicy implements ReleasingPolicy{
     @Override
-    public void releaseSeats(final Reservation reservation, final Integer userId, final List<Integer> seatNumbers) {
-        for (Integer seatNumber : seatNumbers) {
-            Seat seat = reservation.findSeat(seatNumber);
+    public void releaseSeats(final Reservation reservation, final Integer userId, final List<String> seatsIdentifiers) {
+        for (String identifier : seatsIdentifiers) {
+            Seat seat = reservation.findSeat(identifier);
             if (seat == null) {
                 throw new SeatNotFoundException();
             }

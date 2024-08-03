@@ -1,6 +1,6 @@
 package pl.lodz.p.cinema_management.reservation.query.facade;
 
 public record SeatDto(
-        Integer seatNumber,
+        String seatIdentifier,
         Integer takenBy
 ) {}

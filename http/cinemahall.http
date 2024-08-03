@@ -1,0 +1,86 @@
+### Login as Admin
+POST http://localhost:8080/api/v1/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "username": "admin@gmail.com",
+  "password": "password"
+}
+
+> {%
+    client.global.set("auth_token", "Bearer " + response.body.token);
+%}
+
+### Login as User
+POST http://localhost:8080/api/v1/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "username": "user@gmail.com",
+  "password": "password"
+}
+
+> {%
+    client.global.set("auth_token", "Bearer " + response.body.token);
+%}
+
+### Add Cinema Hall
+POST http://localhost:8080/api/v1/cinema_halls
+Accept: application/json
+Content-Type: application/json
+Authorization: {{auth_token}}
+
+{
+  "name": "Main Hall",
+  "seats": [
+    { "seatIdentifier": "A1" },
+    { "seatIdentifier": "A2" },
+    { "seatIdentifier": "A3" },
+    { "seatIdentifier": "B1" },
+    { "seatIdentifier": "B2" },
+    { "seatIdentifier": "B3" },
+    { "seatIdentifier": "C1" },
+    { "seatIdentifier": "C2" },
+    { "seatIdentifier": "C3" },
+    { "seatIdentifier": "D1" },
+    { "seatIdentifier": "D2" },
+    { "seatIdentifier": "D3" }
+  ]
+}
+
+### Get Cinema Halls
+GET http://localhost:8080/api/v1/cinema_halls
+Accept: application/json
+Content-Type: application/json
+Authorization: {{auth_token}}
+
+### Get Cinema Hall by ID
+GET http://localhost:8080/api/v1/cinema_halls/2
+Accept: application/json
+Content-Type: application/json
+Authorization: {{auth_token}}
+
+### Update Cinema Hall
+PUT http://localhost:8080/api/v1/cinema_halls
+Accept: application/json
+Content-Type: application/json
+Authorization: {{auth_token}}
+
+{
+  "id": 4,
+  "name": "Updated Main Hall",
+  "seats": [
+    { "seatIdentifier": "A1" },
+    { "seatIdentifier": "A2" },
+    { "seatIdentifier": "A4" },
+    { "seatIdentifier": "B1" }
+  ]
+}
+
+### Delete Cinema Hall
+DELETE http://localhost:8080/api/v1/cinema_halls/2
+Accept: application/json
+Content-Type: application/json
+Authorization: {{auth_token}}

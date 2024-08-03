@@ -7,12 +7,12 @@ import java.util.List;
 @AllArgsConstructor
 public class VipBookingPolicy implements BookingPolicy{
     @Override
-    public void bookSeats(final Reservation reservation, final Integer userId, final List<Integer> seatNumbers) {
-        if (targetAmountOfSeatsForUser(reservation, userId, seatNumbers) > 5) {
+    public void bookSeats(final Reservation reservation, final Integer userId, final List<String> seatsIdentifiers) {
+        if (targetAmountOfSeatsForUser(reservation, userId, seatsIdentifiers) > 5) {
             throw new MethodNotAllowedException();
         }
 
-        seatNumbers.stream()
+        seatsIdentifiers.stream()
                 .map(reservation::findSeat)
                 .forEach(seat -> {
                     if (seat == null) {
@@ -22,11 +22,11 @@ public class VipBookingPolicy implements BookingPolicy{
                 });
     }
 
-    private Integer targetAmountOfSeatsForUser(final Reservation reservation, final Integer userId, final List<Integer> seatNumbers) {
+    private Integer targetAmountOfSeatsForUser(final Reservation reservation, final Integer userId, final List<String> seatsIdentifiers) {
         long amountOfSeatsAlreadyTakenByUser = reservation.getSeats().stream()
                 .filter(seat -> seat.isTakenBy(userId))
                 .count();
 
-        return (int) amountOfSeatsAlreadyTakenByUser + seatNumbers.size();
+        return (int) amountOfSeatsAlreadyTakenByUser + seatsIdentifiers.size();
     }
 }
