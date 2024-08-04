@@ -4,6 +4,7 @@ import java.util.List;
 
 public record ReservationDto(
         String reservationNumber,
+        String cinemaHallName,
         List<SeatDto>seats,
         Integer version
 ) {}

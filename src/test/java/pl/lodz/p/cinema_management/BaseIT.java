@@ -1,6 +1,7 @@
 package pl.lodz.p.cinema_management;
 
 
+import pl.lodz.p.cinema_management.cinemahall.infrastructure.storage.JpaCinemaHallRepository;
 import pl.lodz.p.cinema_management.reservation.command.infrastructure.storage.JpaReservationRepository;
 import pl.lodz.p.cinema_management.security.JWTUtil;
 import pl.lodz.p.cinema_management.user.domain.UserService;
@@ -55,10 +56,14 @@ public class BaseIT {
 	@Autowired
 	private JpaReservationRepository jpaReservationRepository;
 
+    @Autowired
+    private JpaCinemaHallRepository jpaCinemaHallRepository;
+
 	@BeforeEach
 	void init() {
 		jpaUserRepository.deleteAll();
 		jpaReservationRepository.deleteAll();
+		jpaCinemaHallRepository.deleteAll();
 	}
 
 	protected String localUrl(String endpoint) {

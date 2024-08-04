@@ -36,6 +36,9 @@ public class Reservation {
     @Column
     String reservationNumber;
 
+    @Column(nullable = false)
+    String cinemaHallName;
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<Seat> seats = new ArrayList<>();
 
@@ -48,32 +51,34 @@ public class Reservation {
     @Transient
     ReleasingPolicy releasingPolicy;
 
-    Reservation(final String reservationNumber, Integer amountOfSeats) {
+    Reservation(final String reservationNumber, final String cinemaHallName, List<String> seatsIdentifiers) {
         this.reservationNumber = reservationNumber;
-        for (int i = 0; i < amountOfSeats; i++) {
-            seats.add(new Seat(i + 1, null));
+        this.cinemaHallName = cinemaHallName;
+        for (String identifier : seatsIdentifiers) {
+            this.seats.add(new Seat(identifier));
         }
     }
 
-    public void bookSeats(Integer userId, List<Integer> seatNumbers) {
+
+    public void bookSeats(Integer userId, List<String> seatsIdentifiers) {
         if (bookingPolicy == null) {
             throw new IllegalStateException("Booking policy not set");
         }
 
-        bookingPolicy.bookSeats(this, userId, seatNumbers);
+        bookingPolicy.bookSeats(this, userId, seatsIdentifiers);
     }
 
-    public void releaseSeats(Integer userId, List<Integer> seatNumbers) {
+    public void releaseSeats(Integer userId, List<String> seatsIdentifiers) {
         if (releasingPolicy == null) {
             throw new IllegalStateException("Releasing policy not set");
         }
 
-        releasingPolicy.releaseSeats(this, userId, seatNumbers);
+        releasingPolicy.releaseSeats(this, userId, seatsIdentifiers);
     }
 
-    Seat findSeat(Integer seatNumber) {
+    Seat findSeat(String seatsIdentifier) {
         for (Seat seat : seats) {
-            if (seat.getSeatNumber().equals(seatNumber)) {
+            if (seat.getSeatIdentifier().equals(seatsIdentifier)) {
                 return seat;
             }
         }

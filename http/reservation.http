@@ -48,10 +48,10 @@ Authorization: {{auth_token}}
 
 
 #### delete reservation
-#DELETE http://localhost:8080/api/v1/reservations/res1
-#Accept: application/json
-#Content-Type: application/json
-#Authorization: {{auth_token}}
+DELETE http://localhost:8080/api/v1/reservations/res1
+Accept: application/json
+Content-Type: application/json
+Authorization: {{auth_token}}
 
 ### get all reservations
 GET http://localhost:8080/api/v1/reservations
@@ -60,7 +60,7 @@ Content-Type: application/json
 Authorization: {{auth_token}}
 
 ### get all reservations
-GET http://localhost:8080/api/v1/reservations?page=2&size=3
+GET http://localhost:8080/api/v1/reservations?page=0&size=3
 Accept: application/json
 Content-Type: application/json
 Authorization: {{auth_token}}
@@ -72,7 +72,7 @@ Content-Type: application/json
 Authorization: {{auth_token}}
 
 {
-  "seatNumbers": [1, 2, 3, 4]
+  "seatsIdentifiers": ["A1","A2"]
 }
 
 ### book seats on behalf of the user
@@ -82,7 +82,7 @@ Content-Type: application/json
 Authorization: {{auth_token}}
 
 {
-  "seatNumbers": [1, 2, 3, 4],
+  "seatsIdentifiers": ["A1", "A2", "A3"],
   "userId": 3
 }
 
@@ -93,7 +93,7 @@ Content-Type: application/json
 Authorization: {{auth_token}}
 
 {
-  "seatNumbers": [2, 3]
+  "seatsIdentifiers": ["A1","A2"]
 }
 
 ### create reservation
@@ -104,5 +104,5 @@ Authorization: {{auth_token}}
 
 {
   "reservationNumber": "res3",
-  "amountOfSeats": 3
+  "cinemaHallId": 1
 }

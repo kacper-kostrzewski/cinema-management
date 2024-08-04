@@ -1,8 +1,9 @@
 package pl.lodz.p.cinema_management.reservation.command.domain;
 
 public class ReservationFactory {
-    public static Reservation createReservation(String reservationNumber, Integer amountOfSeats) {
-        Reservation reservation = new Reservation(reservationNumber, amountOfSeats);
+
+    public static Reservation createReservation(String reservationNumber, CinemaHall cinemaHall) {
+        Reservation reservation = new Reservation(reservationNumber, cinemaHall.name(), cinemaHall.seatsIdentifiers());
         return reservation;
     }
 

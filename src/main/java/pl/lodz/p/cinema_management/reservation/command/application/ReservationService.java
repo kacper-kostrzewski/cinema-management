@@ -1,5 +1,6 @@
 package pl.lodz.p.cinema_management.reservation.command.application;
 
+import lombok.extern.java.Log;
 import pl.lodz.p.cinema_management.reservation.command.domain.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -8,13 +9,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
+@Log
 public class ReservationService {
 
     private final ReservationRepository reservationRepository;
     private final AuthenticationService authenticationService;
+    private final CinemaHallService cinemaHallService;
 
-    public Reservation create(final CreateCommand createCommand) {
-        return reservationRepository.save(ReservationFactory.createReservation(createCommand.reservationNumber(), createCommand.amountOfSeats()));
+    public Reservation create(final CreateUsingCinemaHallCommand command) {
+        CinemaHall cinemaHall = cinemaHallService.getCinemaHallById(command.cinemaHallId());
+        return reservationRepository.save(ReservationFactory.createReservation(command.reservationNumber(), cinemaHall));
     }
 
     public void removeByReservationNumber(String reservationNumber) {
@@ -31,13 +35,15 @@ public class ReservationService {
     public void bookSeats(String reservationNumber, BookCommand bookCommand) {
         User user = authenticationService.getLoggedInUser();
         Reservation reservation = ReservationFactory.prepareReservationForUser(findByReservationNumber(reservationNumber), user);
+
         if (bookCommand.userId() == null) {
-            reservation.bookSeats(user.id(), bookCommand.seatNumbers());
+            reservation.bookSeats(user.id(), bookCommand.seatsIdentifiers());
         } else {
             if (user.role() != UserRole.ADMIN) {
                 throw new MethodNotAllowedException();
             }
-            reservation.bookSeats(bookCommand.userId(), bookCommand.seatNumbers());
+
+            reservation.bookSeats(bookCommand.userId(), bookCommand.seatsIdentifiers());
         }
 
 
@@ -46,7 +52,7 @@ public class ReservationService {
     public void releaseSeats(String reservationNumber, final ReleaseCommand releaseCommand) {
         User user = authenticationService.getLoggedInUser();
         Reservation reservation = ReservationFactory.prepareReservationForUser(findByReservationNumber(reservationNumber), user);
-        reservation.releaseSeats(user.id(), releaseCommand.seatNumbers());
+        reservation.releaseSeats(user.id(), releaseCommand.seatsIdentifiers());
     }
 
 }
