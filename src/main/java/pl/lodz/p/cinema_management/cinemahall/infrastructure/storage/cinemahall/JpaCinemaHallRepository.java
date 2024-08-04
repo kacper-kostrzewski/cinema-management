@@ -1,4 +1,4 @@
-package pl.lodz.p.cinema_management.cinemahall.infrastructure.storage;
+package pl.lodz.p.cinema_management.cinemahall.infrastructure.storage.cinemahall;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import pl.lodz.p.cinema_management.cinemahall.domain.CinemaHall;
