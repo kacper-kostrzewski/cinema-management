@@ -1,7 +1,7 @@
 package pl.lodz.p.cinema_management;
 
 
-import pl.lodz.p.cinema_management.cinemahall.infrastructure.storage.JpaCinemaHallRepository;
+import pl.lodz.p.cinema_management.cinemahall.infrastructure.storage.cinemahall.JpaCinemaHallRepository;
 import pl.lodz.p.cinema_management.reservation.command.infrastructure.storage.JpaReservationRepository;
 import pl.lodz.p.cinema_management.security.JWTUtil;
 import pl.lodz.p.cinema_management.user.domain.UserService;

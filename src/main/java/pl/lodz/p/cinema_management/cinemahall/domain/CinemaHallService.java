@@ -3,7 +3,8 @@ package pl.lodz.p.cinema_management.cinemahall.domain;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.lodz.p.cinema_management.cinemahall.infrastructure.storage.CinemaHallRepository;
+import pl.lodz.p.cinema_management.cinemahall.application.AvailabilityService;
+import pl.lodz.p.cinema_management.cinemahall.infrastructure.storage.cinemahall.CinemaHallRepository;
 
 
 import java.util.List;
@@ -14,8 +15,10 @@ import java.util.List;
 public class CinemaHallService {
 
     private final CinemaHallRepository cinemaHallRepository;
+    private final AvailabilityService availabilityService;
 
     public CinemaHall save(CinemaHall cinemaHall) {
+        availabilityService.createCinemaHallAvailability(cinemaHall.getName());
         return cinemaHallRepository.save(cinemaHall);
     }
 
@@ -24,6 +27,8 @@ public class CinemaHallService {
     }
 
     public void removeById(Integer id) {
+
+        // dodać usuwanie
         cinemaHallRepository.remove(id);
     }
 

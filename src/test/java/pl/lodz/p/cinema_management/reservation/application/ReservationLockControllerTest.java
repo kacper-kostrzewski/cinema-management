@@ -22,7 +22,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ReservationControllerTest extends BaseIT {
+class ReservationLockControllerTest extends BaseIT {
 
     @Autowired
     UserService userService;

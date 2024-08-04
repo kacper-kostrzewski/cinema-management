@@ -1,4 +1,4 @@
-package pl.lodz.p.cinema_management.cinemahall.infrastructure.storage;
+package pl.lodz.p.cinema_management.cinemahall.infrastructure.storage.cinemahall;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
