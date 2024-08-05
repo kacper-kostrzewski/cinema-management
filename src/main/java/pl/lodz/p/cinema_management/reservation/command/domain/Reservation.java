@@ -3,11 +3,13 @@ package pl.lodz.p.cinema_management.reservation.command.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(
+        name = "reservations",
         uniqueConstraints = {
                 @UniqueConstraint(
                         name = "reservation_number_unique",
@@ -39,6 +41,12 @@ public class Reservation {
     @Column(nullable = false)
     String cinemaHallName;
 
+    @Column(nullable = false)
+    String filmName;
+
+    @Column(nullable = false)
+    LocalDateTime reservationDateTime;
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<Seat> seats = new ArrayList<>();
 
@@ -57,6 +65,16 @@ public class Reservation {
         for (String identifier : seatsIdentifiers) {
             this.seats.add(new Seat(identifier));
         }
+    }
+
+    Reservation(final String reservationNumber, final String cinemaHallName, final List<String> seatsIdentifiers, final String filmName, final LocalDateTime reservationDateTime) {
+        this.reservationNumber = reservationNumber;
+        this.cinemaHallName = cinemaHallName;
+        for (String identifier : seatsIdentifiers) {
+            this.seats.add(new Seat(identifier));
+        }
+        this.filmName = filmName;
+        this.reservationDateTime = reservationDateTime;
     }
 
 

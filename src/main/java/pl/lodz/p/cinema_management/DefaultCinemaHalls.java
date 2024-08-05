@@ -33,8 +33,8 @@ public class DefaultCinemaHalls implements CommandLineRunner {
     );
 
     private final CinemaHall hall3 = new CinemaHall(
-            "VIP Hall",
-            Stream.of("A1", "A2", "B1", "B2", "C1", "C2").map(text -> new Seat(null, text)).collect(Collectors.toList())
+            "Main Hall",
+            Stream.of("A1", "A2", "B1", "B2", "B2", "B3", "C1", "C2", "C3").map(text -> new Seat(null, text)).collect(Collectors.toList())
     );
 
     @Override

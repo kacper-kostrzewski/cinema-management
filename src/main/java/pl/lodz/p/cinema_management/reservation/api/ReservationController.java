@@ -22,7 +22,7 @@ class ReservationController {
     private final ReservationService reservationService;
 
     @PostMapping
-    public ResponseEntity<Void> createReservation(@RequestBody CreateUsingCinemaHallCommand createCommand){
+    public ResponseEntity<Void> createReservation(@RequestBody CreateCommand createCommand){
         reservationService.create(createCommand);
         return ResponseEntity.ok().build();
     }

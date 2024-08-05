@@ -104,5 +104,7 @@ Authorization: {{auth_token}}
 
 {
   "reservationNumber": "res3",
-  "cinemaHallId": 1
+  "cinemaHallId": 1,
+  "filmId": 1,
+  "reservationDateTime": "2024-06-12T17:00:00"
 }

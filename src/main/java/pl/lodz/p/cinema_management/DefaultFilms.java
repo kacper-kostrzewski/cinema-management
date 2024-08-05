@@ -20,18 +20,13 @@ public class DefaultFilms implements CommandLineRunner {
     }
 
     private final Film film1 = new Film(
-            "The Dark Knight",
-            152
+            "Suzume",
+            122
     );
 
     private final Film film2 = new Film(
-            "Inception",
-            148
-    );
-
-    private final Film film3 = new Film(
-            "Interstellar",
-            169
+            "Your Name",
+            106
     );
 
     @Override
@@ -39,7 +34,6 @@ public class DefaultFilms implements CommandLineRunner {
         try {
             addFilm(film1);
             addFilm(film2);
-            addFilm(film3);
         } catch (Exception ex) {
             log.warning(ex.getMessage());
         }
