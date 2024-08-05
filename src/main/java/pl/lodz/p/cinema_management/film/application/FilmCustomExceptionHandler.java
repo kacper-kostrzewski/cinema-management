@@ -1,26 +1,25 @@
-package pl.lodz.p.cinema_management.cinemahall.application;
+package pl.lodz.p.cinema_management.film.application;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import pl.lodz.p.cinema_management.cinemahall.domain.CinemaHallAlreadyExistsException;
-import pl.lodz.p.cinema_management.cinemahall.domain.CinemaHallNotFoundException;
-import pl.lodz.p.cinema_management.user.api.ErrorResponse;
+import pl.lodz.p.cinema_management.film.domain.FilmAlreadyExistsException;
+import pl.lodz.p.cinema_management.film.domain.FilmNotFoundException;
 
 import java.io.IOException;
 
 @ControllerAdvice
-class CinemaHallCustomExceptionHandler extends ResponseEntityExceptionHandler {
+class FilmCustomExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(CinemaHallNotFoundException.class)
-    public final ResponseEntity<ErrorResponse> handleUserNotFoundException(CinemaHallNotFoundException ex) {
+    @ExceptionHandler(FilmNotFoundException.class)
+    public final ResponseEntity<ErrorResponse> handleFilmNotFoundException(FilmNotFoundException ex) {
         return buildResponse(ex,  HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(CinemaHallAlreadyExistsException.class)
-    public final ResponseEntity<ErrorResponse> handleUserAlreadyExistsException(CinemaHallAlreadyExistsException ex) {
+    @ExceptionHandler(FilmAlreadyExistsException.class)
+    public final ResponseEntity<ErrorResponse> handleFilmAlreadyExistsException(FilmAlreadyExistsException ex) {
         return buildResponse(ex, HttpStatus.CONFLICT);
     }
 
