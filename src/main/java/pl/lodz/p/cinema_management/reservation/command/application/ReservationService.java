@@ -21,9 +21,11 @@ public class ReservationService {
     public Reservation create(final CreateCommand createCommand) {
         CinemaHall cinemaHall = cinemaHallService.getCinemaHallById(createCommand.cinemaHallId());
         Film film = filmService.getFilmById(createCommand.filmId());
-
+        try {
         availabilityService.lockTimeFrame(cinemaHall.name(), createCommand.reservationNumber(), createCommand.reservationDateTime(), film.duration());
-
+        } catch (RuntimeException e) {
+            throw new ReservationAlreadyExistsException();
+        }
         return reservationRepository.save(ReservationFactory.createReservation(createCommand.reservationNumber(), cinemaHall, film, createCommand.reservationDateTime()));
     }
 

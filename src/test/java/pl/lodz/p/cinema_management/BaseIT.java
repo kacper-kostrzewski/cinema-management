@@ -2,6 +2,7 @@ package pl.lodz.p.cinema_management;
 
 
 
+import pl.lodz.p.cinema_management.availability.command.application.AvailabilityService;
 import pl.lodz.p.cinema_management.availability.command.infrastructure.storage.JpaCinemaHallAvailabilityRepository;
 import pl.lodz.p.cinema_management.cinemahall.infrastructure.storage.cinemahall.JpaCinemaHallRepository;
 import pl.lodz.p.cinema_management.film.infrastructure.storage.JpaFilmRepository;

@@ -45,53 +45,6 @@ class ReservationControllerTest extends BaseIT {
     @Autowired
     ReservationService reservationService;
 
-
-    @Test
-    void admin_should_create_reservation_successfully() {
-        // Given
-        User admin = TestUserFactory.createAdmin();
-        userService.save(admin);
-        String token = getAccessTokenForUser(admin);
-
-        CinemaHall cinemaHall = TestCinemaHallFactory.createCinemaHall();
-        Integer cinemaHallId = cinemaHallService.save(cinemaHall).getId();
-
-        Film film = TestFilmFactory.createFilm();
-        Integer filmId = filmService.save(film).getId();
-
-        LocalDateTime reservationDateTime = LocalDateTime.of(2024, Month.JANUARY, 1, 12,0);
-
-        // When
-        CreateCommand command = new CreateCommand("res1", cinemaHallId, filmId, reservationDateTime);
-        var postResponse = callHttpMethod(
-                HttpMethod.POST,
-                "/api/v1/reservations",
-                token,
-                command,
-                void.class
-        );
-
-        // Then
-        assertEquals(HttpStatus.OK, postResponse.getStatusCode());
-        // Fetch the reservation from the service to verify
-        Reservation reservation = reservationService.findByReservationNumber("res1");
-
-        // Verify reservation details
-        assertNotNull(reservation, "Reservation should not be null");
-        assertEquals(cinemaHall.getName(), reservation.getCinemaHallName(), "Cinema hall name should match");
-        assertEquals(film.getName(), reservation.getFilmName(), "Film name should match");
-        assertEquals(reservationDateTime, reservation.getReservationDateTime(), "Reservation date and time should match");
-
-        // Verify seats
-        assertNotNull(reservation.getSeats(), "Seats should not be null");
-        assertEquals(cinemaHall.getSeats().size(), reservation.getSeats().size(), "Number of seats should match");
-        for (int i = 0; i < reservation.getSeats().size(); i++) {
-            assertEquals(cinemaHall.getSeats().get(i).getSeatIdentifier(), reservation.getSeats().get(i).getSeatIdentifier(), "Seat identifier should match");
-        }
-
-    }
-
-
     @Test
     void admin_should_return_not_found_when_trying_to_create_reservation_for_non_existent_cinema_hall() {
         // Given
@@ -121,6 +74,51 @@ class ReservationControllerTest extends BaseIT {
 
 
     @Test
+    void admin_should_create_reservation_successfully() {
+        // Given
+        User admin = TestUserFactory.createAdmin();
+        userService.save(admin);
+        String token = getAccessTokenForUser(admin);
+
+        CinemaHall cinemaHall = TestCinemaHallFactory.createCinemaHall();
+        Integer cinemaHallId = cinemaHallService.save(cinemaHall).getId();
+
+        Film film = TestFilmFactory.createFilm();
+        Integer filmId = filmService.save(film).getId();
+
+        LocalDateTime reservationDateTime = LocalDateTime.of(2024, Month.JANUARY, 1, 12,0);
+
+        // When
+        CreateCommand command = new CreateCommand("res1", cinemaHallId, filmId, reservationDateTime);
+        var postResponse = callHttpMethod(
+                HttpMethod.POST,
+                "/api/v1/reservations",
+                token,
+                command,
+                Void.class
+        );
+
+        // Then
+        assertEquals(HttpStatus.OK, postResponse.getStatusCode());
+        // Fetch the reservation from the service to verify
+        Reservation reservation = reservationService.findByReservationNumber("res1");
+
+        // Verify reservation details
+        assertNotNull(reservation, "Reservation should not be null");
+        assertEquals(cinemaHall.getName(), reservation.getCinemaHallName(), "Cinema hall name should match");
+        assertEquals(film.getName(), reservation.getFilmName(), "Film name should match");
+        assertEquals(reservationDateTime, reservation.getReservationDateTime(), "Reservation date and time should match");
+
+        // Verify seats
+        assertNotNull(reservation.getSeats(), "Seats should not be null");
+        assertEquals(cinemaHall.getSeats().size(), reservation.getSeats().size(), "Number of seats should match");
+        for (int i = 0; i < reservation.getSeats().size(); i++) {
+            assertEquals(cinemaHall.getSeats().get(i).getSeatIdentifier(), reservation.getSeats().get(i).getSeatIdentifier(), "Seat identifier should match");
+        }
+
+    }
+
+    @Test
     void admin_should_return_conflict_when_trying_to_create_reservation_overlapping_with_existing_reservation() {
         // Given
         User admin = TestUserFactory.createAdmin();
@@ -137,7 +135,7 @@ class ReservationControllerTest extends BaseIT {
         LocalDateTime reservationDateTime2 = LocalDateTime.of(2024, Month.JANUARY, 1, 12,30);
 
         CreateCommand createCommand1 = new CreateCommand("res1", cinemaHallId, filmId, reservationDateTime1);
-        CreateCommand createCommand2 = new CreateCommand("res1", cinemaHallId, filmId, reservationDateTime2);
+        CreateCommand createCommand2 = new CreateCommand("res2", cinemaHallId, filmId, reservationDateTime2);
 
         callHttpMethod(HttpMethod.POST, "/api/v1/reservations", token, createCommand1, Void.class);
 
@@ -152,6 +150,41 @@ class ReservationControllerTest extends BaseIT {
 
         // Then
         assertEquals(HttpStatus.CONFLICT, postResponse.getStatusCode());
+    }
+
+
+    @Test
+    void admin_should_create_reservation_successfully_when_not_overlapping_with_existing_reservation() {
+        // Given
+        User admin = TestUserFactory.createAdmin();
+        userService.save(admin);
+        String token = getAccessTokenForUser(admin);
+
+        CinemaHall cinemaHall = TestCinemaHallFactory.createCinemaHall();
+        Integer cinemaHallId = cinemaHallService.save(cinemaHall).getId();
+
+        Film film = TestFilmFactory.createFilm();
+        Integer filmId = filmService.save(film).getId();
+
+        LocalDateTime reservationDateTime1 = LocalDateTime.of(2024, Month.JANUARY, 1, 12,0);
+        LocalDateTime reservationDateTime2 = LocalDateTime.of(2024, Month.JANUARY, 1, 13,45);
+
+        CreateCommand createCommand1 = new CreateCommand("res1", cinemaHallId, filmId, reservationDateTime1);
+        CreateCommand createCommand2 = new CreateCommand("res2", cinemaHallId, filmId, reservationDateTime2);
+
+        callHttpMethod(HttpMethod.POST, "/api/v1/reservations", token, createCommand1, Void.class);
+
+        // When
+        var postResponse = callHttpMethod(
+                HttpMethod.POST,
+                "/api/v1/reservations",
+                token,
+                createCommand2,
+                Void.class
+        );
+
+        // Then
+        assertEquals(HttpStatus.OK, postResponse.getStatusCode());
     }
 
 
@@ -732,7 +765,7 @@ class ReservationControllerTest extends BaseIT {
     }
 
 
-
+    @Test
     void admin_should_create_reservation_only_with_available_cinema_hall() {
         // Given
         User admin = TestUserFactory.createAdmin();
