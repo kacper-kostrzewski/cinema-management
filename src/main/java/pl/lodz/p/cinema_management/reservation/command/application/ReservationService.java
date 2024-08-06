@@ -6,8 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -17,25 +15,28 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
     private final AuthenticationService authenticationService;
     private final CinemaHallService cinemaHallService;
+    private final FilmService filmService;
     private final AvailabilityService availabilityService;
 
-    public Reservation create(final CreateUsingCinemaHallCommand command) {
-        CinemaHall cinemaHall = cinemaHallService.getCinemaHallById(command.cinemaHallId());
-
-        availabilityService.lockTimeFrame(cinemaHall.name(), command.reservationNumber(), LocalDateTime.now(), 120);
-
-        return reservationRepository.save(ReservationFactory.createReservation(command.reservationNumber(), cinemaHall));
+    public Reservation create(final CreateCommand createCommand) {
+        CinemaHall cinemaHall = cinemaHallService.getCinemaHallById(createCommand.cinemaHallId());
+        Film film = filmService.getFilmById(createCommand.filmId());
+        try {
+        availabilityService.lockTimeFrame(cinemaHall.name(), createCommand.reservationNumber(), createCommand.reservationDateTime(), film.duration());
+        } catch (RuntimeException e) {
+            throw new ReservationAlreadyExistsException();
+        }
+        return reservationRepository.save(ReservationFactory.createReservation(createCommand.reservationNumber(), cinemaHall, film, createCommand.reservationDateTime()));
     }
 
     public void removeByReservationNumber(String reservationNumber) {
-        Reservation reservation = findByReservationNumber(reservationNumber);        reservationRepository.remove(reservation.getId());
+        Reservation reservation = findByReservationNumber(reservationNumber);
+        reservationRepository.remove(reservation.getId());
     }
 
     public Reservation findByReservationNumber(String reservationNumber) {
-
-        final Reservation reservation = reservationRepository.findByReservationNumber(reservationNumber)
+        return reservationRepository.findByReservationNumber(reservationNumber)
                 .orElseThrow(ReservationNotFoundException::new);
-        return reservation;
     }
 
     public void bookSeats(String reservationNumber, BookCommand bookCommand) {

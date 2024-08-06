@@ -23,8 +23,11 @@ public class AvailabilityService {
     }
 
     public void lockTimeFrame(LockCommand lockCommand) {
+
+        Integer lockBuffer = 30;
+
         LocalDateTime lockStart = lockCommand.lockStart();
-        LocalDateTime lockFinish = lockStart.plusMinutes(lockCommand.duration());
+        LocalDateTime lockFinish = lockStart.plusMinutes(lockCommand.duration() + lockBuffer);
         TimeFrame timeFrame = new TimeFrame(lockStart, lockFinish);
 
         CinemaHallAvailability cinemaHallAvailability = cinemaHallAvailabilityRepository.findByCinemaHallName(lockCommand.cinemaHallName())
