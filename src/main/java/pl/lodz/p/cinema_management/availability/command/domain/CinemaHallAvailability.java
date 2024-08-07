@@ -39,7 +39,7 @@ public class CinemaHallAvailability {
     String cinemaHallName;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    List<ReservationLock> reservationLocks = new ArrayList<>();
+    List<ReservationTimeSlot> reservationTimeSlots = new ArrayList<>();
 
     @Version
     Integer version;
@@ -49,17 +49,17 @@ public class CinemaHallAvailability {
         this.cinemaHallName = cinemaHallName;
     }
 
-    public void lockTimeFrame(ReservationLock newLock) {
-        for (ReservationLock lock : reservationLocks) {
-            if (lock.getTimeFrame().overlaps(newLock.getTimeFrame())) {
+    public void lockForGivenTimeInterval(ReservationTimeSlot timeInterval) {
+        for (ReservationTimeSlot lock : reservationTimeSlots) {
+            if (lock.getTimeSlot().overlaps(timeInterval.getTimeSlot())) {
                 throw new OverlappingTimeFrameException();
             }
         }
-        reservationLocks.add(newLock);
+        reservationTimeSlots.add(timeInterval);
     }
 
     public void unlockTimeFrame(String reservationNumber) {
-        reservationLocks.removeIf(lock -> lock.getReservationNumber().equals(reservationNumber));
+        reservationTimeSlots.removeIf(lock -> lock.getFilmShowNumber().equals(reservationNumber));
     }
 
 

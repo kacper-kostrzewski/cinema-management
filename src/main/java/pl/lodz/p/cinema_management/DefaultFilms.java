@@ -20,13 +20,13 @@ public class DefaultFilms implements CommandLineRunner {
     }
 
     private final Film film1 = new Film(
-            "Suzume",
-            122
+            "Film 1",
+            120
     );
 
     private final Film film2 = new Film(
-            "Your Name",
-            106
+            "Film 2",
+            90
     );
 
     @Override

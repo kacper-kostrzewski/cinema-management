@@ -2,11 +2,10 @@ package pl.lodz.p.cinema_management;
 
 
 
-import pl.lodz.p.cinema_management.availability.command.application.AvailabilityService;
 import pl.lodz.p.cinema_management.availability.command.infrastructure.storage.JpaCinemaHallAvailabilityRepository;
 import pl.lodz.p.cinema_management.cinemahall.infrastructure.storage.cinemahall.JpaCinemaHallRepository;
 import pl.lodz.p.cinema_management.film.infrastructure.storage.JpaFilmRepository;
-import pl.lodz.p.cinema_management.reservation.command.infrastructure.storage.JpaReservationRepository;
+import pl.lodz.p.cinema_management.filmshow.command.infrastructure.storage.JpaFilmShowRepository;
 import pl.lodz.p.cinema_management.security.JWTUtil;
 import pl.lodz.p.cinema_management.user.domain.UserService;
 import pl.lodz.p.cinema_management.user.domain.User;
@@ -58,7 +57,7 @@ public class BaseIT {
 	private JpaUserRepository jpaUserRepository;
 
 	@Autowired
-	private JpaReservationRepository jpaReservationRepository;
+	private JpaFilmShowRepository jpaFilmShowRepository;
 
     @Autowired
     private JpaCinemaHallRepository jpaCinemaHallRepository;
@@ -72,7 +71,7 @@ public class BaseIT {
 	@BeforeEach
 	void init() {
 		jpaUserRepository.deleteAll();
-		jpaReservationRepository.deleteAll();
+		jpaFilmShowRepository.deleteAll();
 		jpaCinemaHallRepository.deleteAll();
 		jpaFilmRepository.deleteAll();
 		jpaCinemaHallAvailabilityRepository.deleteAll();

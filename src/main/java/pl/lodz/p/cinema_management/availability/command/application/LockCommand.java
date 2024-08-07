@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public record LockCommand(
         String cinemaHallName,
-        String reservationNumber,
+        String filmShowNumber,
         LocalDateTime lockStart,
         Integer duration
 ) {
