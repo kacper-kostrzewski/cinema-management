@@ -1,6 +1,7 @@
 package pl.lodz.p.cinema_management.availability.command.application;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 import pl.lodz.p.cinema_management.availability.command.domain.*;
 
@@ -8,6 +9,7 @@ import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
+@Log
 public class AvailabilityService {
 
 
@@ -22,21 +24,25 @@ public class AvailabilityService {
                 .orElseThrow(CinemaHallNotFoundException::new);
     }
 
-    public void lockTimeFrame(LockCommand lockCommand) {
+    public void lockCinemaHall(LockCommand lockCommand) {
 
         Integer lockBuffer = 30;
 
         LocalDateTime lockStart = lockCommand.lockStart();
         LocalDateTime lockFinish = lockStart.plusMinutes(lockCommand.duration() + lockBuffer);
-        TimeFrame timeFrame = new TimeFrame(lockStart, lockFinish);
+        TimeSlot timeSlot = new TimeSlot(lockStart, lockFinish);
 
         CinemaHallAvailability cinemaHallAvailability = cinemaHallAvailabilityRepository.findByCinemaHallName(lockCommand.cinemaHallName())
                 .orElseThrow(CinemaHallNotFoundException::new);
 
-        ReservationLock newLock = new ReservationLock(lockCommand.reservationNumber(), timeFrame);
-        cinemaHallAvailability.lockTimeFrame(newLock);
+        ReservationTimeSlot newWindow = new ReservationTimeSlot(lockCommand.filmShowNumber(), timeSlot);
+        cinemaHallAvailability.lockForGivenTimeInterval(newWindow);
 
-        System.out.println("####### Time frame locked successfully");
+        log.info(String.format("%s was successfully locked from %s to %s for film show number '%s'",
+                lockCommand.cinemaHallName(),
+                lockStart,
+                lockFinish,
+                lockCommand.filmShowNumber()));
     }
 
 
@@ -44,9 +50,9 @@ public class AvailabilityService {
         CinemaHallAvailability cinemaHallAvailability = cinemaHallAvailabilityRepository.findByCinemaHallName(unlockCommand.cinemaHallName())
                 .orElseThrow(CinemaHallNotFoundException::new);
 
-        cinemaHallAvailability.unlockTimeFrame(unlockCommand.reservationNumber());
+        cinemaHallAvailability.unlockTimeFrame(unlockCommand.filmShowNumber());
 
-        System.out.println("####### Time frame unlocked successfully");
+        log.info(String.format("%s was successfully unlocked", unlockCommand.cinemaHallName()));
     }
 
 }
