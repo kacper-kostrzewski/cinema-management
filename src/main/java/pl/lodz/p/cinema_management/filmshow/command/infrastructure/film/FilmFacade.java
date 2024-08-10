@@ -20,4 +20,9 @@ public class FilmFacade implements FilmService {
         return filmMapper.toReservationContext(film);
     }
 
+    @Override
+    public pl.lodz.p.cinema_management.filmshow.command.domain.Film getFilmByName(String name) {
+        Film film = filmService.findByName(name);
+        return filmMapper.toReservationContext(film);
+    }
 }

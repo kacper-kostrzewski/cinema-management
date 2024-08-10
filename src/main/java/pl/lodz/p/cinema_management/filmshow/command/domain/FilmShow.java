@@ -80,11 +80,11 @@ public class FilmShow {
     }
 
 
-    public void confirmSeats(Integer userId, List<String> seatsIdentifiers) {
+    public void confirmSeats(Integer userId, List<String> seatsIdentifiers, Integer duration) {
         validateSeatsForUser(userId, seatsIdentifiers);
 
         LocalDateTime now = LocalDateTime.now();
-        LocalDateTime filmShowEndTime = filmShowDateTime.plusHours(2);
+        LocalDateTime filmShowEndTime = this.filmShowDateTime.plusMinutes(duration + 30);
 
         if (filmShowEndTime.isBefore(now)) {
             throw new FilmShowEndedException();

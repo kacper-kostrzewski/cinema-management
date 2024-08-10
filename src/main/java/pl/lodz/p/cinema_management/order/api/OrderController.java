@@ -1,10 +1,15 @@
 package pl.lodz.p.cinema_management.order.api;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.lodz.p.cinema_management.order.command.application.CreateCommand;
 import pl.lodz.p.cinema_management.order.command.application.OrderService;
+import pl.lodz.p.cinema_management.order.query.facade.OrderDto;
+import pl.lodz.p.cinema_management.order.query.facade.OrderFacade;
+import pl.lodz.p.cinema_management.order.query.facade.PageOrderDto;
 
 @RequiredArgsConstructor
 @RestController
@@ -26,6 +31,22 @@ class OrderController {
     public ResponseEntity<Void> processPayment(@PathVariable String orderNumber) {
         orderService.processPayment(orderNumber);
         return ResponseEntity.ok().build();
+    }
+
+    private final OrderFacade orderFacade;
+
+    @GetMapping(path = "/{orderNumber}")
+    public ResponseEntity<OrderDto> getOrder(@PathVariable String orderNumber) {
+        return ResponseEntity.ok(orderFacade.findByOrderNumber(orderNumber));
+    }
+
+    @GetMapping
+    public ResponseEntity<PageOrderDto> getOrders(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "3") int size
+    ) {
+        Pageable pageable = PageRequest.of(page, size);
+        return ResponseEntity.ok(orderFacade.findAll(pageable));
     }
 
 
