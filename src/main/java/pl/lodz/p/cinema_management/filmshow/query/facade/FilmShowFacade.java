@@ -1,6 +1,5 @@
 package pl.lodz.p.cinema_management.filmshow.query.facade;
 
-
 import pl.lodz.p.cinema_management.filmshow.command.domain.FilmShow;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;

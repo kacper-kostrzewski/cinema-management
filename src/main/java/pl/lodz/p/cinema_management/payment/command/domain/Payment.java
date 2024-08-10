@@ -76,6 +76,7 @@ public class Payment {
     @Version
     Integer version;
 
+
     public Payment(PaymentNumber paymentNumber, OrderId orderId, UserId userId, FilmShowId filmShowId, List<SeatId> seats, Price price) {
         this.paymentNumber = paymentNumber;
         this.orderId = orderId;
