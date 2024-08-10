@@ -6,6 +6,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(
@@ -78,11 +79,27 @@ public class FilmShow {
         bookingPolicy.bookSeats(this, userId, seatsIdentifiers);
     }
 
+
+    public void confirmSeats(Integer userId, List<String> seatsIdentifiers) {
+        validateSeatsForUser(userId, seatsIdentifiers);
+
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime filmShowEndTime = filmShowDateTime.plusHours(2);
+
+        if (filmShowEndTime.isBefore(now)) {
+            throw new FilmShowEndedException();
+        }
+
+        for (String seatIdentifier : seatsIdentifiers) {
+            Seat seat = findSeat(seatIdentifier);
+            seat.confirmSeat(filmShowEndTime);
+        }
+    }
+
     public void releaseSeats(Integer userId, List<String> seatsIdentifiers) {
         if (releasingPolicy == null) {
             throw new IllegalStateException("Releasing policy not set");
         }
-
         releasingPolicy.releaseSeats(this, userId, seatsIdentifiers);
     }
 
@@ -95,4 +112,20 @@ public class FilmShow {
 
         return null;
     }
+
+    public void validateSeatsForUser(Integer userId, List<String> seatsIdentifiers) {
+        for (String seatIdentifier : seatsIdentifiers) {
+            Seat seat = findSeat(seatIdentifier);
+            if (seat == null) {
+                throw new SeatNotFoundException();
+            }
+            if (!seat.isTakenBy(userId)) {
+                throw new SeatAlreadyTakenException();
+            }
+            if (seat.getTemporarilyBookedTo().isBefore(LocalDateTime.now())) {
+                throw new ReservationTimedOutException();
+            }
+        }
+    }
+
 }

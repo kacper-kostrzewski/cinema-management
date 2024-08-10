@@ -41,14 +41,14 @@ Content-Type: application/json
 %}
 
 ### get filmShow by id
-GET http://localhost:8080/api/v1/filmshows/FS2
+GET http://localhost:8080/api/v1/filmshows/SHOW-2
 Accept: application/json
 Content-Type: application/json
 Authorization: {{auth_token}}
 
 
 #### delete filmShow
-DELETE http://localhost:8080/api/v1/filmshows/FS1
+DELETE http://localhost:8080/api/v1/filmshows/SHOW-1
 Accept: application/json
 Content-Type: application/json
 Authorization: {{auth_token}}
@@ -66,7 +66,7 @@ Content-Type: application/json
 Authorization: {{auth_token}}
 
 ### book seats
-POST http://localhost:8080/api/v1/filmshows/FS2/book
+POST http://localhost:8080/api/v1/filmshows/SHOW-2/book
 Accept: application/json
 Content-Type: application/json
 Authorization: {{auth_token}}
@@ -76,7 +76,7 @@ Authorization: {{auth_token}}
 }
 
 ### book seats on behalf of the user
-POST http://localhost:8080/api/v1/filmshows/FS2/book
+POST http://localhost:8080/api/v1/filmshows/SHOW-2/book
 Accept: application/json
 Content-Type: application/json
 Authorization: {{auth_token}}
@@ -87,7 +87,7 @@ Authorization: {{auth_token}}
 }
 
 ### release seats
-POST http://localhost:8080/api/v1/filmshows/FS2/release
+POST http://localhost:8080/api/v1/filmshows/SHOW-2/release
 Accept: application/json
 Content-Type: application/json
 Authorization: {{auth_token}}
@@ -108,3 +108,38 @@ Authorization: {{auth_token}}
   "filmId": 1,
   "filmShowDateTime": "2024-08-12T17:15:00"
 }
+
+
+### Select Seats
+POST http://localhost:8080/api/v1/filmshows/SHOW-2/book
+Accept: application/json
+Content-Type: application/json
+Authorization: {{auth_token}}
+
+{
+  "seatsIdentifiers": ["A1","A2"]
+}
+
+
+### Create Order
+POST http://localhost:8080/api/v1/filmshows/SHOW-2/order
+Accept: application/json
+Content-Type: application/json
+Authorization: {{auth_token}}
+
+{
+  "orderNumber": "ORD-1" ,
+  "seatsIdentifiers": ["A1","A2"]
+}
+
+### Initiate Payment
+POST http://localhost:8080/api/v1/order/ORD-1/process-payment
+Accept: application/json
+Content-Type: application/json
+Authorization: {{auth_token}}
+
+### Complete Payment
+POST http://localhost:8080/api/v1/payment/PAY-1/complete
+Accept: application/json
+Content-Type: application/json
+Authorization: {{auth_token}}

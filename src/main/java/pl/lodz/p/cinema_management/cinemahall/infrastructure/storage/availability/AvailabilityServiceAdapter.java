@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import pl.lodz.p.cinema_management.cinemahall.application.AvailabilityService;
 
 
-@Component
+@Component("cinemahallAvailabilityServiceAdapter")
 @RequiredArgsConstructor
 public class AvailabilityServiceAdapter implements AvailabilityService {
 

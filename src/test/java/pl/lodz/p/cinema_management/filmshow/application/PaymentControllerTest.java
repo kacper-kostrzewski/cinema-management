@@ -31,7 +31,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FilmShowControllerTest extends BaseIT {
+class PaymentControllerTest extends BaseIT {
 
     @Autowired
     UserService userService;

@@ -30,13 +30,18 @@ class FilmShowStorageAdapter implements FilmShowRepository {
     }
 
     @Override
-    public void remove(final Integer id) {
-        filmShowRepository.findById(id).ifPresent(userEntity -> filmShowRepository.deleteById(id));
+    public Optional<FilmShow> findById(Integer filmShowId) {
+        return filmShowRepository.findById(filmShowId);
     }
 
     @Override
     public Optional<FilmShow> findByFilmShowNumber(final String filmShowNumber) {
         return filmShowRepository.findByFilmShowNumber(filmShowNumber);
+    }
+
+    @Override
+    public void remove(final Integer id) {
+        filmShowRepository.findById(id).ifPresent(userEntity -> filmShowRepository.deleteById(id));
     }
 
 }
