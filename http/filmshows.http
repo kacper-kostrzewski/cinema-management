@@ -120,26 +120,20 @@ Authorization: {{auth_token}}
   "seatsIdentifiers": ["A1","A2"]
 }
 
-
 ### Create Order
 POST http://localhost:8080/api/v1/filmshows/SHOW-2/order
 Accept: application/json
 Content-Type: application/json
 Authorization: {{auth_token}}
 
-{
-  "orderNumber": "ORD-1" ,
-  "seatsIdentifiers": ["A1","A2"]
-}
-
 ### Initiate Payment
-POST http://localhost:8080/api/v1/order/ORD-1/process-payment
+POST http://localhost:8080/api/v1/order/ORDER-1/process-payment
 Accept: application/json
 Content-Type: application/json
 Authorization: {{auth_token}}
 
 ### Complete Payment
-POST http://localhost:8080/api/v1/payment/PAY-1/complete
+POST http://localhost:8080/api/v1/payment/PAYMENT-1/complete
 Accept: application/json
 Content-Type: application/json
 Authorization: {{auth_token}}

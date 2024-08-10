@@ -48,8 +48,8 @@ class FilmShowController {
     }
 
     @PostMapping("{filmShowNumber}/order")
-    public ResponseEntity<Void> generateOrder(@PathVariable String filmShowNumber, @RequestBody GenerateOrderCommand generateOrderCommand) {
-        filmShowService.generateOrder(filmShowNumber, generateOrderCommand);
+    public ResponseEntity<Void> generateOrder(@PathVariable String filmShowNumber) {
+        filmShowService.generateOrder(filmShowNumber);
         return ResponseEntity.ok().build();
     }
 

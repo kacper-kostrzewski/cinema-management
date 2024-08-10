@@ -128,4 +128,14 @@ public class FilmShow {
         }
     }
 
+    public List<String> getReservedSeatsForUser(Integer userId) {
+        List<String> reservedSeats = new ArrayList<>();
+        for (Seat seat : seats) {
+            if (seat.isTakenBy(userId)) {
+                reservedSeats.add(seat.getSeatIdentifier());
+            }
+        }
+        return reservedSeats;
+    }
+
 }

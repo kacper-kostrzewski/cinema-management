@@ -29,7 +29,7 @@ public class OrderService {
     public void processPayment(String orderNumber) {
         Order order = findByOrderNumber(OrderNumber.of(orderNumber));
         log.info("Processing payment for " + order);
-        paymentService.processPayment(order);
+        paymentService.createPayment(order);
     }
 
 }

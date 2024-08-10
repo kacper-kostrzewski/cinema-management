@@ -15,6 +15,7 @@ public class PaymentService {
 
     private final PaymentRepository paymentRepository;
     private final SeatConfirmationService seatConfirmationService;
+    private final TicketService ticketService;
 
     public Payment create(CreateCommand createCommand) {
         log.info("Creating new payment");
@@ -40,7 +41,15 @@ public class PaymentService {
         seatConfirmationService.confirmSeats(
                 payment.getUserId().value(),
                 payment.getFilmShowId().value(),
-                SeatId.toStringList(payment.getSeats()));
+                SeatId.toStringList(payment.getSeats())
+        );
+
+        ticketService.createTicket(
+                payment.getUserId().value(),
+                payment.getFilmShowId().value(),
+                SeatId.toStringList(payment.getSeats())
+        );
+
     }
 
 }
