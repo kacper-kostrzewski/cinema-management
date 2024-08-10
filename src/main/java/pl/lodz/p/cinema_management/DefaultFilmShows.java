@@ -13,19 +13,19 @@ import java.time.Month;
 @Component
 @Log
 @Order(4)
-public class DefaultReservations implements CommandLineRunner {
+public class DefaultFilmShows implements CommandLineRunner {
 
     private final FilmShowService filmShowService;
 
-    public DefaultReservations(FilmShowService filmShowService) {
+    public DefaultFilmShows(FilmShowService filmShowService) {
         this.filmShowService = filmShowService;
     }
 
     @Override
     public void run(String... args) {
         try {
-            createReservation(new CreateCommand("FS1", 1, 1, LocalDateTime.of(2024, Month.JUNE, 12, 14, 30)));
-            createReservation(new CreateCommand("FS2", 2, 1, LocalDateTime.of(2024, Month.JUNE, 10, 10, 15)));
+            createReservation(new CreateCommand("SHOW-1", 1, 1, LocalDateTime.of(2025, Month.JUNE, 12, 14, 30)));
+            createReservation(new CreateCommand("SHOW-2", 2, 1, LocalDateTime.of(2025, Month.JUNE, 10, 10, 15)));
         } catch (Exception ex) {
             log.warning(ex.getMessage());
         }

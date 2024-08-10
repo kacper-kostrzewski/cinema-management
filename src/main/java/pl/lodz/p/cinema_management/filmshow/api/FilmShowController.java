@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RequiredArgsConstructor
 @RestController
@@ -42,6 +44,12 @@ class FilmShowController {
     @PostMapping("{filmShowNumber}/release")
     public ResponseEntity<Void> releaseSeats(@PathVariable String filmShowNumber, @RequestBody ReleaseCommand releaseCommand){
         filmShowService.releaseSeats(filmShowNumber, releaseCommand);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("{filmShowNumber}/order")
+    public ResponseEntity<Void> generateOrder(@PathVariable String filmShowNumber, @RequestBody GenerateOrderCommand generateOrderCommand) {
+        filmShowService.generateOrder(filmShowNumber, generateOrderCommand);
         return ResponseEntity.ok().build();
     }
 

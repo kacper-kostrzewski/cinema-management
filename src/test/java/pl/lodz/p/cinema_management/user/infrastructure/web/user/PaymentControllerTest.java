@@ -14,7 +14,7 @@ import org.springframework.http.HttpStatus;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FilmShowControllerTest extends BaseIT {
+class PaymentControllerTest extends BaseIT {
 
     @Autowired
     UserService service;

@@ -6,15 +6,14 @@ import pl.lodz.p.cinema_management.filmshow.command.application.AvailabilityServ
 
 import java.time.LocalDateTime;
 
-
-@Component
+@Component("FilmShowAvailabilityServiceAdapter")
 @RequiredArgsConstructor
-public class AvailabilityServiceFacade implements AvailabilityService {
+public class AvailabilityServiceAdapter implements AvailabilityService {
 
     private final pl.lodz.p.cinema_management.availability.command.application.AvailabilityService availabilityService;
 
     @Override
-    public void lockTimeFrame (String cinemaHallName, String filmShowNumber, LocalDateTime lockStart, Integer duration) {
+    public void lockCinemaHall(String cinemaHallName, String filmShowNumber, LocalDateTime lockStart, Integer duration) {
       availabilityService.lockCinemaHall(new pl.lodz.p.cinema_management.availability.command.application.LockCommand(
               cinemaHallName,
               filmShowNumber,

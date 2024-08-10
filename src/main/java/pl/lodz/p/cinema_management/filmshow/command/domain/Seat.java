@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity(name = "FilmShowSeat")
 @Getter
 @Setter
@@ -15,22 +17,18 @@ public class Seat {
     @Id
     @GeneratedValue
     Integer id;
-    @Column(
-            nullable = false
-    )
+
+    @Column(nullable = false)
     String seatIdentifier;
-    @Column(
-            nullable = true
-    )
+
+    @Column
     Integer takenBy;
+
+    @Column
+    LocalDateTime temporarilyBookedTo;
 
     Seat(final String seatIdentifier) {
         this.seatIdentifier = seatIdentifier;
-    }
-
-    Seat(final String seatIdentifier, final Integer takenBy) {
-        this.seatIdentifier = seatIdentifier;
-        this.takenBy = takenBy;
     }
 
     public boolean isTaken() {
@@ -38,14 +36,20 @@ public class Seat {
     }
 
     public void takeBy(Integer userId) {
-        if (takenBy != null) {
+        if (this.takenBy != null && this.temporarilyBookedTo.isAfter(LocalDateTime.now())) {
             throw new SeatAlreadyTakenException();
         }
-        takenBy = userId;
+        this.takenBy = userId;
+        this.temporarilyBookedTo = LocalDateTime.now().plusMinutes(1);
+    }
+
+    public void confirmSeat(LocalDateTime filmShowEnd) {
+        this.temporarilyBookedTo = filmShowEnd;
     }
 
     public void release() {
-        takenBy = null;
+        this.takenBy = null;
+        this.temporarilyBookedTo = null;
     }
 
     boolean isTakenBy(Integer userId) {
