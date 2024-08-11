@@ -1,4 +1,4 @@
-package pl.lodz.p.cinema_management.ticket.command.infrastructure.storage;
+package pl.lodz.p.cinema_management.ticket.command.infrastructure.storage.ticket;
 
 import jakarta.persistence.LockModeType;
 import org.springframework.data.jpa.repository.JpaRepository;

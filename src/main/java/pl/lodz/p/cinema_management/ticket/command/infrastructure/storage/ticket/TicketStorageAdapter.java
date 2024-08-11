@@ -1,4 +1,4 @@
-package pl.lodz.p.cinema_management.ticket.command.infrastructure.storage;
+package pl.lodz.p.cinema_management.ticket.command.infrastructure.storage.ticket;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;

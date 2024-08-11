@@ -40,21 +40,63 @@ public class Ticket {
 
     @Embedded
     @Column(nullable = false)
-    FilmShowId filmShowId;
+    UserId userId;
 
     @Embedded
     @Column(nullable = false)
-    UserId userId;
+    FilmName filmName;
+
+    @Embedded
+    @Column(nullable = false)
+    CinemaHallName cinemaHallName;
+
+    @Embedded
+    @Column(nullable = false)
+    FilmShowDateTime filmShowDateTime;
 
     @Embedded
     @Column(nullable = false)
     SeatId seatId;
 
-    public Ticket(TicketNumber ticketNumber, FilmShowId filmShowId, UserId userId, SeatId seatId) {
+    @Embedded
+    @Column(nullable = false)
+    Price price;
+
+    @Embedded
+    @Column(nullable = false)
+    GenerationTime generationTime;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    TicketStatus ticketStatus;
+
+    @Version
+    Integer version;
+
+    public Ticket(TicketNumber ticketNumber, UserId userId, FilmName filmName, CinemaHallName cinemaHallName, FilmShowDateTime filmShowDateTime, SeatId seatId, Price price, GenerationTime generationTime, TicketStatus ticketStatus) {
         this.ticketNumber = ticketNumber;
-        this.filmShowId = filmShowId;
         this.userId = userId;
+        this.filmName = filmName;
+        this.cinemaHallName = cinemaHallName;
+        this.filmShowDateTime = filmShowDateTime;
         this.seatId = seatId;
+        this.price = price;
+        this.generationTime = generationTime;
+        this.ticketStatus = ticketStatus;
+    }
+
+    public void markAsUsed() {
+        if (this.ticketStatus != TicketStatus.VALID) {
+            throw new IllegalStateException("Ticket must be valid before it can be used.");
+        }
+        this.ticketStatus = TicketStatus.USED;
+    }
+
+    public void cancel() {
+        if (this.ticketStatus == TicketStatus.USED) {
+            throw new IllegalStateException("Cannot cancel a used ticket.");
+        }
+        this.ticketStatus = TicketStatus.INVALID;
     }
 
 }

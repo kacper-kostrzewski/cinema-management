@@ -1,4 +1,4 @@
-package pl.lodz.p.cinema_management.payment.facade;
+package pl.lodz.p.cinema_management.payment.query.facade;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

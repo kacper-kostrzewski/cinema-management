@@ -1,4 +1,4 @@
-package pl.lodz.p.cinema_management.payment.facade;
+package pl.lodz.p.cinema_management.payment.query.facade;
 
 import lombok.Value;
 import pl.lodz.p.cinema_management.payment.command.domain.Payment;

@@ -47,7 +47,8 @@ public class PaymentService {
         ticketService.createTicket(
                 payment.getUserId().value(),
                 payment.getFilmShowId().value(),
-                SeatId.toStringList(payment.getSeats())
+                SeatId.toStringList(payment.getSeats()),
+                payment.getPrice().value()
         );
 
     }

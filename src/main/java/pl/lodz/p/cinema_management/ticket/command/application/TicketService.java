@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.lodz.p.cinema_management.ticket.command.domain.*;
 
+import java.time.LocalDateTime;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -13,22 +15,44 @@ import pl.lodz.p.cinema_management.ticket.command.domain.*;
 public class TicketService {
 
     private final TicketRepository ticketRepository;
+    private final FilmShowDetailsService filmShowDetailsService;
 
     public Ticket create(CreateCommand createCommand) {
         log.info("Attempting to create a new ticket with details: " + createCommand);
 
-        Ticket ticket = new Ticket(
-                TicketNumber.of(createCommand.ticketNumber()),
-                FilmShowId.of(createCommand.filmShowId()),
-                UserId.of(createCommand.userId()),
-                SeatId.of(createCommand.seatId())
-        );
-        log.info("Created ticket entity: " + ticket);
+        FilmShow filmShow = filmShowDetailsService.getFilmShowById(createCommand.filmShowId());
 
-        Ticket savedTicket = ticketRepository.save(ticket);
+        Ticket savedTicket = ticketRepository.save(
+                TicketFactory.createTicket(TicketNumber.of(createCommand.ticketNumber()),
+                        UserId.of(createCommand.userId()),
+                        FilmName.of(filmShow.filmName()),
+                        CinemaHallName.of(filmShow.cinemaHallName()),
+                        FilmShowDateTime.of(filmShow.filmShowDateTime()),
+                        SeatId.of(createCommand.seatId()),
+                        Price.of(createCommand.price()),
+                        GenerationTime.of(LocalDateTime.now()),
+                        TicketStatus.VALID
+                )
+        );
         log.info("Saved ticket entity: " + savedTicket);
 
         return savedTicket;
+    }
+
+
+    public void markTicketAsUsed(TicketNumber ticketNumber) {
+        Ticket ticket = ticketRepository.findByTicketNumber(ticketNumber)
+                .orElseThrow(TicketNotFoundException::new);
+        ticket.markAsUsed();
+        ticketRepository.save(ticket);
+    }
+
+
+    public void cancelTicket(TicketNumber ticketNumber) {
+        Ticket ticket = ticketRepository.findByTicketNumber(ticketNumber)
+                .orElseThrow(TicketNotFoundException::new);
+        ticket.cancel();
+        ticketRepository.save(ticket);
     }
 
 }
