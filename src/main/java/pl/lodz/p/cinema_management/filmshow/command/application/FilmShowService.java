@@ -71,7 +71,7 @@ public class FilmShowService {
         filmShow.releaseSeats(user.id(), releaseCommand.seatsIdentifiers());
     }
 
-    public void generateOrder(String filmShowNumber) {
+    public OrderNumber generateOrder(String filmShowNumber) {
         User user = authenticationService.getLoggedInUser();
         FilmShow filmShow = findByFilmShowNumber(filmShowNumber);
 
@@ -82,9 +82,11 @@ public class FilmShowService {
 
         filmShow.validateSeatsForUser(user.id(), reservedSeats);
 
-        orderService.createOrder(user.id(), filmShow.getId(), reservedSeats);
+        OrderNumber orderNumber = OrderNumber.of(orderService.createOrder(user.id(), filmShow.getId(), reservedSeats).orderNumber());
 
         log.info("Order generated successfully for user: " + user.id() + " with seats: " + reservedSeats);
+
+        return orderNumber;
     }
 
 
