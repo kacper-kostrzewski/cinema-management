@@ -6,10 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.lodz.p.cinema_management.ticket.command.application.AuthenticationService;
-import pl.lodz.p.cinema_management.ticket.command.domain.Ticket;
-import pl.lodz.p.cinema_management.ticket.command.domain.TicketNumber;
-import pl.lodz.p.cinema_management.ticket.command.domain.User;
-import pl.lodz.p.cinema_management.ticket.command.domain.UserId;
+import pl.lodz.p.cinema_management.ticket.command.domain.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +24,17 @@ public class TicketFacade {
 
     public TicketDto findByTicketNumber(final String ticketNumber) {
         final Optional<Ticket> maybeTicket = jpaQueryTicketRepository.findByTicketNumber(TicketNumber.of(ticketNumber));
-        return ticketDtoMapper.toDto(maybeTicket.orElseThrow(TicketNotFoundException::new));
+        Ticket ticket = maybeTicket.orElseThrow(TicketNotFoundException::new);
+
+        User user = authenticationService.getLoggedInUser();
+
+        if (user.role() != UserRole.ADMIN) {
+            if (!ticket.getUserId().equals(UserId.of(user.id()))) {
+                throw new RuntimeException("User is not authorized to view this ticket");
+            }
+        }
+
+        return ticketDtoMapper.toDto(ticket);
     }
 
     public PageTicketDto findUserTickets(Pageable pageable) {
