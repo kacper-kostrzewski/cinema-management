@@ -1,12 +1,12 @@
 package pl.lodz.p.cinema_management;
 
-
-
 import pl.lodz.p.cinema_management.availability.command.infrastructure.storage.JpaCinemaHallAvailabilityRepository;
 import pl.lodz.p.cinema_management.cinemahall.infrastructure.storage.cinemahall.JpaCinemaHallRepository;
 import pl.lodz.p.cinema_management.film.infrastructure.storage.JpaFilmRepository;
 import pl.lodz.p.cinema_management.filmshow.command.infrastructure.storage.JpaFilmShowRepository;
+import pl.lodz.p.cinema_management.order.command.infrastructure.storage.JpaOrderRepository;
 import pl.lodz.p.cinema_management.security.JWTUtil;
+import pl.lodz.p.cinema_management.ticket.command.infrastructure.storage.ticket.JpaTicketRepository;
 import pl.lodz.p.cinema_management.user.domain.UserService;
 import pl.lodz.p.cinema_management.user.domain.User;
 import pl.lodz.p.cinema_management.user.infrastructure.storage.JpaUserRepository;
@@ -68,6 +68,12 @@ public class BaseIT {
 	@Autowired
 	private JpaCinemaHallAvailabilityRepository jpaCinemaHallAvailabilityRepository;
 
+	@Autowired
+	private JpaOrderRepository jpaOrderRepository;
+
+	@Autowired
+	private JpaTicketRepository jpaTicketRepository;
+
 	@BeforeEach
 	void init() {
 		jpaUserRepository.deleteAll();
@@ -75,6 +81,8 @@ public class BaseIT {
 		jpaCinemaHallRepository.deleteAll();
 		jpaFilmRepository.deleteAll();
 		jpaCinemaHallAvailabilityRepository.deleteAll();
+		jpaOrderRepository.deleteAll();
+		jpaTicketRepository.deleteAll();
 	}
 
 	protected String localUrl(String endpoint) {

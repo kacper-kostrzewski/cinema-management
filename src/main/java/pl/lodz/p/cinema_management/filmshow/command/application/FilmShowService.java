@@ -32,6 +32,11 @@ public class FilmShowService {
         return filmShowRepository.save(FilmShowFactory.createFilmShow(createCommand.filmShowNumber(), cinemaHall, film, createCommand.filmShowDateTime()));
     }
 
+    public FilmShow findByFilmShowId(Integer id) {
+        return filmShowRepository.findById(id)
+                .orElseThrow(FilmShowNotFoundException::new);
+    }
+
     public FilmShow findByFilmShowNumber(String filmShowNumber) {
         return filmShowRepository.findByFilmShowNumber(filmShowNumber)
                 .orElseThrow(FilmShowNotFoundException::new);
@@ -66,21 +71,25 @@ public class FilmShowService {
         filmShow.releaseSeats(user.id(), releaseCommand.seatsIdentifiers());
     }
 
-    public void generateOrder(String filmShowNumber, final GenerateOrderCommand generateOrderCommand) {
+    public OrderNumber generateOrder(String filmShowNumber) {
         User user = authenticationService.getLoggedInUser();
         FilmShow filmShow = findByFilmShowNumber(filmShowNumber);
 
-        filmShow.validateSeatsForUser(user.id(), generateOrderCommand.seatsIdentifiers());
-
-        if (generateOrderCommand.userId() != null) {
-            if (user.role() != UserRole.ADMIN) {
-                throw new MethodNotAllowedException();
-            }
+        List<String> reservedSeats = filmShow.getReservedSeatsForUser(user.id());
+        if (reservedSeats.isEmpty()) {
+            throw new RuntimeException("No seats reserved for user: " + user.id());
         }
 
-        orderService.createOrder(generateOrderCommand.orderNumber(), user.id(), filmShow.getId(), generateOrderCommand.seatsIdentifiers());
+        filmShow.validateSeatsForUser(user.id(), reservedSeats);
 
-        log.info("Order generated successfully for user: " + user.id());
+        OrderNumber orderNumber = OrderNumber.of(orderService.createOrder(user.id(), filmShow.getId(), reservedSeats).orderNumber());
+
+        log.info("Order generated successfully for user: " + user.id() + " with seats: " + reservedSeats);
+
+        return orderNumber;
     }
+
+
+
 
 }

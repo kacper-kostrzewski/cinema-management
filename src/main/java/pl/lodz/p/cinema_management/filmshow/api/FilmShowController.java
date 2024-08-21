@@ -1,6 +1,7 @@
 package pl.lodz.p.cinema_management.filmshow.api;
 
 import pl.lodz.p.cinema_management.filmshow.command.application.*;
+import pl.lodz.p.cinema_management.filmshow.command.domain.OrderNumber;
 import pl.lodz.p.cinema_management.filmshow.query.facade.PageFilmShowDto;
 import pl.lodz.p.cinema_management.filmshow.query.facade.FilmShowDto;
 import pl.lodz.p.cinema_management.filmshow.query.facade.FilmShowFacade;
@@ -48,9 +49,9 @@ class FilmShowController {
     }
 
     @PostMapping("{filmShowNumber}/order")
-    public ResponseEntity<Void> generateOrder(@PathVariable String filmShowNumber, @RequestBody GenerateOrderCommand generateOrderCommand) {
-        filmShowService.generateOrder(filmShowNumber, generateOrderCommand);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<String> generateOrder(@PathVariable String filmShowNumber) {
+        OrderNumber orderNumber = filmShowService.generateOrder(filmShowNumber);
+        return ResponseEntity.ok(orderNumber.asString());
     }
 
     private final FilmShowFacade filmShowFacade;

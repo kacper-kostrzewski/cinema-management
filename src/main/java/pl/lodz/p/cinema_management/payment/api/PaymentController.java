@@ -6,9 +6,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.lodz.p.cinema_management.payment.command.application.PaymentService;
-import pl.lodz.p.cinema_management.payment.facade.PagePaymentDto;
-import pl.lodz.p.cinema_management.payment.facade.PaymentDto;
-import pl.lodz.p.cinema_management.payment.facade.PaymentFacade;
+import pl.lodz.p.cinema_management.payment.query.facade.PagePaymentDto;
+import pl.lodz.p.cinema_management.payment.query.facade.PaymentDto;
+import pl.lodz.p.cinema_management.payment.query.facade.PaymentFacade;
 
 
 @RequiredArgsConstructor

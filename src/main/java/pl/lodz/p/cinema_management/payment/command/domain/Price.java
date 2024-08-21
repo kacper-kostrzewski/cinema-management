@@ -25,4 +25,8 @@ public record Price(BigDecimal price) {
         return price;
     }
 
+    public Price divide(Integer divisor) {
+        return new Price(this.price.divide(BigDecimal.valueOf(divisor), 2, RoundingMode.HALF_UP));
+    }
+
 }
