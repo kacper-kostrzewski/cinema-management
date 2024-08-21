@@ -40,6 +40,15 @@ class OrderController {
         return ResponseEntity.ok(orderFacade.findByOrderNumber(orderNumber));
     }
 
+    @GetMapping("/my-orders")
+    public ResponseEntity<PageOrderDto> getMyOrders(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "3") int size
+    ) {
+        Pageable pageable = PageRequest.of(page, size);
+        return ResponseEntity.ok(orderFacade.findUserOrders(pageable));
+    }
+
     @GetMapping
     public ResponseEntity<PageOrderDto> getOrders(
             @RequestParam(defaultValue = "0") int page,
