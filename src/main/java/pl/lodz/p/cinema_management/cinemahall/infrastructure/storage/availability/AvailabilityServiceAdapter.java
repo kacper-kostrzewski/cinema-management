@@ -16,5 +16,9 @@ public class AvailabilityServiceAdapter implements AvailabilityService {
       availabilityService.create(new pl.lodz.p.cinema_management.availability.command.application.CreateCommand(cinemaHallName));
     }
 
+    @Override
+    public void removeCinemaHallAvailability(String cinemaHallName) {
+        availabilityService.remove(new pl.lodz.p.cinema_management.availability.command.application.RemoveCommand(cinemaHallName));
+    }
 
 }

@@ -16,16 +16,23 @@ public class AvailabilityService {
     private final CinemaHallAvailabilityRepository cinemaHallAvailabilityRepository;
 
     public CinemaHallAvailability create(final CreateCommand createCommand) {
+        log.info("Creating new cinema hall availability for cinemaHallName: " + createCommand.cinemaHallName());
         return cinemaHallAvailabilityRepository.save(new CinemaHallAvailability(createCommand.cinemaHallName()));
     }
 
+    public void remove(final RemoveCommand removeCommand) {
+        log.info("Removing cinema hall availability for cinemaHallName: " + removeCommand.cinemaHallName());
+        cinemaHallAvailabilityRepository.remove(removeCommand.cinemaHallName());
+    }
+
     public CinemaHallAvailability findByCinemaHallName(String cinemaHallName) {
+        log.info("Finding cinema hall availability for cinemaHallName: " + cinemaHallName);
         return cinemaHallAvailabilityRepository.findByCinemaHallName(cinemaHallName)
                 .orElseThrow(CinemaHallNotFoundException::new);
     }
 
     public void lockCinemaHall(LockCommand lockCommand) {
-
+        log.info("Locking cinema hall with cinemaHallName: " + lockCommand.cinemaHallName());
         Integer lockBuffer = 30;
 
         LocalDateTime lockStart = lockCommand.lockStart();
@@ -47,6 +54,7 @@ public class AvailabilityService {
 
 
     public void unlockTimeFrame(UnlockCommand unlockCommand) {
+        log.info("Unlocking cinema hall with cinemaHallName: " + unlockCommand.cinemaHallName());
         CinemaHallAvailability cinemaHallAvailability = cinemaHallAvailabilityRepository.findByCinemaHallName(unlockCommand.cinemaHallName())
                 .orElseThrow(CinemaHallNotFoundException::new);
 
