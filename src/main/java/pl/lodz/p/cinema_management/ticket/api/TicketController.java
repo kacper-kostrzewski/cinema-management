@@ -5,6 +5,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.lodz.p.cinema_management.ticket.command.application.TicketService;
+import pl.lodz.p.cinema_management.ticket.command.domain.TicketNotFoundException;
+import pl.lodz.p.cinema_management.ticket.command.domain.TicketNumber;
 import pl.lodz.p.cinema_management.ticket.query.facade.PageTicketDto;
 import pl.lodz.p.cinema_management.ticket.query.facade.TicketDto;
 import pl.lodz.p.cinema_management.ticket.query.facade.TicketFacade;
@@ -16,6 +19,20 @@ import pl.lodz.p.cinema_management.ticket.query.facade.TicketFacade;
         consumes = "application/json"
 )
 class TicketController {
+
+    private final TicketService ticketService;
+
+    @PostMapping("/{ticketNumber}/use")
+    public ResponseEntity<Void> markTicketAsUsed(@PathVariable String ticketNumber) {
+        ticketService.markTicketAsUsed(TicketNumber.of(ticketNumber));
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/{ticketNumber}/cancel")
+    public ResponseEntity<Void> cancelTicket(@PathVariable String ticketNumber) {
+        ticketService.cancelTicket(TicketNumber.of(ticketNumber));
+        return ResponseEntity.ok().build();
+    }
 
     private final TicketFacade ticketFacade;
 

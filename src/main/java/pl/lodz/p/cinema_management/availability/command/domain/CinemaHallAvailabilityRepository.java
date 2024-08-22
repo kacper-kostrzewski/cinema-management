@@ -5,6 +5,7 @@ import java.util.Optional;
 public interface CinemaHallAvailabilityRepository {
 
     CinemaHallAvailability save(CinemaHallAvailability cinemaHallAvailability);
+    void remove(String cinemaHallName);
     Optional<CinemaHallAvailability> findByCinemaHallName(String cinemaHallName);
 
 }

@@ -30,6 +30,11 @@ public class CinemaHallAvailabilityStorageAdapter implements CinemaHallAvailabil
     }
 
     @Override
+    public void remove(String cinemaHallName) {
+        cinemaHallAvailabilityRepository.deleteByCinemaHallName(cinemaHallName);
+    }
+
+    @Override
     public Optional<CinemaHallAvailability> findByCinemaHallName(String cinemaHallName) {
         return cinemaHallAvailabilityRepository.findByCinemaHallName(cinemaHallName);
     }

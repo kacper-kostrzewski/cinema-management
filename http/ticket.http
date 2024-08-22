@@ -45,3 +45,15 @@ GET http://localhost:8080/api/v1/ticket?page=2&size=3
 Accept: application/json
 Content-Type: application/json
 Authorization: {{auth_token}}
+
+### use ticket (only admin)
+POST http://localhost:8080/api/v1/ticket/TICKET-1/use
+Accept: application/json
+Content-Type: application/json
+Authorization: {{auth_token}}
+
+### cancel ticket (only admin)
+POST http://localhost:8080/api/v1/ticket/TICKET-2/cancel
+Accept: application/json
+Content-Type: application/json
+Authorization: {{auth_token}}

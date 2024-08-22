@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface JpaCinemaHallAvailabilityRepository extends JpaRepository<CinemaHallAvailability, Integer> {
     @Lock(LockModeType.OPTIMISTIC_FORCE_INCREMENT)
     Optional<CinemaHallAvailability> findByCinemaHallName(String cinemaHallName);
+    void deleteByCinemaHallName(String cinemaHallName);
 }
