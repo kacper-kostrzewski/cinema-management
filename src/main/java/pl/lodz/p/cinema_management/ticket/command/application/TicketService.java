@@ -41,6 +41,17 @@ public class TicketService {
         return savedTicket;
     }
 
+    public Ticket findByTicketNumber(String ticketNumber) {
+        log.info("Searching for Ticket with Number: " + ticketNumber);
+        Ticket ticket = ticketRepository.findByTicketNumber(TicketNumber.of(ticketNumber))
+                .orElseThrow(() -> {
+                    log.warning("Ticket not found with Number: " + ticketNumber);
+                    return new TicketNotFoundException();
+                });
+        log.info("Ticket found: " + ticket.toString());
+        return ticket;
+    }
+
     public void markTicketAsUsed(TicketNumber ticketNumber) {
         log.info("Marking ticket as used for TicketNumber: " + ticketNumber.toString());
 
